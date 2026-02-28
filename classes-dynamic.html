@@ -6,32 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
       body {  }
+      .item-btn {margin-right: 5px;}
     .item {margin-bottom:4px;}
     .inactive-btn {border:1px solid rgb(143,143,157); border-radius: 4px;
              background-color: rgb(233,233,237); padding: 2px 5px; 
              cursor: pointer;}
     .inactive-counter {margin-right: 10px; background-color: rgb(233,233,237);
-          min-width: 10px; border:1px solid rgb(143,143,157); border-radius: 4px;
+          min-width: 10px; border:none; border-radius: 4px;
           padding: 1px 4px;color: rgb(233,233,237);}
   </style>
 </head>
 <body>
 
+<div class="section" id="s1">
+
+<p>Proteins 
+  <span>count: </span>
+  <span class="inactive-counter">0</span>
+</p>
+<p>(choose 2)</p>
+
 <div class="item">
-  <button id="i1" class="inactive-btn">Item 1</button>
+  <button id="i1" class="item-btn inactive-btn ">Item 1</button>
   <span id="i1c" class="inactive-counter">0</span>
 </div>
 
 <div class="item">
-  <button id="i2" class="inactive-btn">Item 1</button>
-  <span id="i2c" class="inactive-counter" >00</span>
+  <button id="i2" class="item-btn inactive-btn">Item 1</button>
+  <span id="i2c" class="inactive-counter" >0</span>
 </div>
 
 <div class="item">
-  <button id="i3" class="inactive-btn">Item 1</button>
-  <span id="i3c" class="inactive-counter" >000</span>
+  <button id="i3" class="item-btn inactive-btn">Item 1</button>
+  <span id="i3c" class="inactive-counter" >0</span>
 </div>
-
+</div> <!--section 1 end-->
 
 
 </body>
