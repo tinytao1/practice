@@ -52,6 +52,12 @@
   <button id="i3" class="item-btn inactive-btn">Item 3</button>
   <span id="i3c" class="counter inactive-counter" >0</span>
 </div>
+
+<div class="item-div">
+  <button id="i4" class="item-btn inactive-btn">Item 4</button>
+  <span id="i4c" class="counter inactive-counter" >0</span>
+</div>
+
 </div> <!--section 1 end-->
 
 <script>
@@ -72,6 +78,33 @@ const item1 = {
   button : document.querySelector('#i1'),
   counter : document.querySelector('#i1c'),
 };
+const item2 = {
+  name : 'Chicken Breast',
+  count : 0,
+  limit : null,
+  selected : false,
+  at_limit : false,
+  button : document.querySelector('#i2'),
+  counter : document.querySelector('#i2c'),
+};
+const item3 = {
+  name : 'Pork Chop',
+  count : 0,
+  limit : null,
+  selected : false,
+  at_limit : false,
+  button : document.querySelector('#i3'),
+  counter : document.querySelector('#i3c'),
+};
+const item4 = {
+  name : 'Tempeh',
+  count : 0,
+  limit : null,
+  selected : false,
+  at_limit : false,
+  button : document.querySelector('#i4'),
+  counter : document.querySelector('#i4c'),
+};
 
 item1.button.addEventListener('click', () => {
   select();
@@ -79,14 +112,15 @@ item1.button.addEventListener('click', () => {
 
 item1.button.innerHTML = item1.name;
 
-
-
 function select() {
+  if (s1.count == s1.limit) {}
+
   if (item1.count == 0) {
     activate(item1);
     if (s1.count == 0) { activate(s1); }
   }
   item1.count++;
+  item1.selected = true;
   s1.count++;
   item1.counter.textContent = item1.count;
   s1.counter.textContent = item1.count;
@@ -95,6 +129,7 @@ function select() {
   if (s1.count == s1.limit) {
     activate_limit(s1);
     activate_limit(item1);
+    disable_unselected_items();
   }
 }
 
@@ -106,7 +141,17 @@ function activate_limit(element) {
   element.counter.classList.remove('active-counter');
   element.counter.classList.add('active-counter-limit');
 }
+// Array of button IDs
+const s1_items = [item1, item2, item3, item4];
 
+function disable_unselected_items() {
+// Loop through IDs and disable
+s1_items.forEach(item => {
+  if (item.selected == false) {
+    item.button.disabled = true; // Sets the disabled attribute to true
+  }
+});
+}
 
 
 
