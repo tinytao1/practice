@@ -5,16 +5,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-      body {  }
-      button:hover {border:1px solid rgb(0,0,0);}
-      button:active {background-color: #d5d5dd;}
-      .item-btn {margin-right: 5px;}
+    body {  }
+      
+      
+    .item-btn {margin-right: 5px;}
     .item-div {margin-bottom:4px;}
 
-    .inactive-btn {border:1px solid rgb(143,143,157); border-radius: 4px;
+    .inactive-btn {border:1px solid rgb(143,143,157); border-radius: 9999px;
              background-color: rgb(233,233,237); padding: 2px 5px; 
              cursor: pointer; min-width: 180px;}
     
+    .inactive-btn:active {background-color: #d5d5dd;}
+    .inactive-btn:hover {border:1px solid rgb(0,0,0);}
+
+    /* The class to disable the hover effect */
+    .disabled-btn:hover {
+    /* Set the background-color to what it should be when disabled,
+    or use !important to ensure it overrides the :hover style */
+    border:1px solid rgb(143,143,157) !important; 
+    cursor: default;}
+
     .counter {margin-right: 10px; min-width: 10px; padding: 1px 4px; 
               background-color: rgb(233,233,237); border-radius: 4px; 
               color: rgb(233,233,237); font-family: Arial, Helvetica, sans-serif; } 
@@ -66,6 +76,7 @@ const s1 = {
   name : 'Proteins',
   count : 0,
   limit : 2,
+  limit_reached : false,
   counter : document.querySelector('#s1c'),
 };
 
@@ -74,7 +85,7 @@ const item1 = {
   count : 0,
   limit : null,
   selected : false,
-  at_limit : false,
+  limit_reached : false,
   button : document.querySelector('#i1'),
   counter : document.querySelector('#i1c'),
 };
@@ -83,7 +94,7 @@ const item2 = {
   count : 0,
   limit : null,
   selected : false,
-  at_limit : false,
+  limit_reached : false,
   button : document.querySelector('#i2'),
   counter : document.querySelector('#i2c'),
 };
@@ -92,7 +103,7 @@ const item3 = {
   count : 0,
   limit : null,
   selected : false,
-  at_limit : false,
+  limit_reached : false,
   button : document.querySelector('#i3'),
   counter : document.querySelector('#i3c'),
 };
@@ -101,7 +112,7 @@ const item4 = {
   count : 0,
   limit : null,
   selected : false,
-  at_limit : false,
+  limit_reached : false,
   button : document.querySelector('#i4'),
   counter : document.querySelector('#i4c'),
 };
@@ -111,6 +122,9 @@ item1.button.addEventListener('click', () => {
 });
 
 item1.button.innerHTML = item1.name;
+item2.button.innerHTML = item2.name;
+item3.button.innerHTML = item3.name;
+item4.button.innerHTML = item4.name;
 
 function select() {
   if (s1.count == s1.limit) {}
@@ -127,6 +141,8 @@ function select() {
   console.log(item1.count);
 
   if (s1.count == s1.limit) {
+    s1.limit_reached = true;
+    item1.limit_reached = true;
     activate_limit(s1);
     activate_limit(item1);
     disable_unselected_items();
@@ -147,8 +163,9 @@ const s1_items = [item1, item2, item3, item4];
 function disable_unselected_items() {
 // Loop through IDs and disable
 s1_items.forEach(item => {
-  if (item.selected == false) {
+  if (!item.selected) {
     item.button.disabled = true; // Sets the disabled attribute to true
+    item.button.classList.add('disabled-btn');
   }
 });
 }
