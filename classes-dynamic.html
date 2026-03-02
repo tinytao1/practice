@@ -29,7 +29,9 @@
               background-color: rgb(233,233,237); border-radius: 4px; 
               color: rgb(233,233,237); font-family: Arial, Helvetica, sans-serif; } 
 
-    .inactive-counter { border:none;  }
+    .inactive-counter { border:none  !important ;
+                        background-color: rgb(233,233,237) !important;
+                        color: rgb(233,233,237) !important ; }
     .active-counter { color: black; } 
     .active-counter-limit { color: black; border: 1px solid red;
                               background-color: #ffe6e6;}
@@ -127,25 +129,44 @@ item3.button.innerHTML = item3.name;
 item4.button.innerHTML = item4.name;
 
 function select() {
-  if (s1.count == s1.limit) {}
+  if (s1.count == s1.limit) {
+    deactivate(s1); 
+    deactivate(item1);
+    s1.count = s1.count - item1.count;
+    item1.count = 0;
+    
+    item1.selected = false;
+    s1.limit_reached = false;
+    item1.limit_reached = false;
+    item1.counter.innerHTML = item1.count;
+    s1.counter.innerHTML = item1.count;
+    console.log("item 1 count: " + item1.count);
+    console.log("s1 count: " + s1.count);
+  }
 
-  if (item1.count == 0) {
+  else if (item1.count == 0) {
     activate(item1);
     if (s1.count == 0) { activate(s1); }
+    item1.count++;
+    item1.selected = true;
+    s1.count++;
+    item1.counter.textContent = item1.count;
+    s1.counter.textContent = item1.count;
+    console.log("item 1 count: " + item1.count);
+    console.log("s1 count: " + s1.count);
+    } else {
+    item1.count++;
+    item1.selected = true;
+    s1.count++;
+    item1.counter.textContent = item1.count;
+    s1.counter.textContent = item1.count;
+    console.log("item 1 count: " + item1.count);
+    console.log("s1 count: " + s1.count);
   }
-  item1.count++;
-  item1.selected = true;
-  s1.count++;
-  item1.counter.textContent = item1.count;
-  s1.counter.textContent = item1.count;
-  console.log(item1.count);
-
   if (s1.count == s1.limit) {
     s1.limit_reached = true;
     item1.limit_reached = true;
-    activate_limit(s1);
-    activate_limit(item1);
-    disable_unselected_items();
+    limit_reached_loop();
   }
 }
 
@@ -153,9 +174,23 @@ function activate(element) {
   element.counter.classList.remove('inactive-counter');
   element.counter.classList.add('active-counter');
 }
+function deactivate(element) {
+  element.counter.classList.remove('active-counter');
+  element.counter.classList.add('inactive-counter');
+}
 function activate_limit(element) {
   element.counter.classList.remove('active-counter');
   element.counter.classList.add('active-counter-limit');
+}
+function limit_reached_loop() {
+  activate_limit(s1);
+  disable_unselected_items();
+  // Loop through IDs and disable
+  s1_items.forEach(item => {
+    if (item.limit_reached) {
+      activate_limit(item);
+    }
+  });
 }
 // Array of button IDs
 const s1_items = [item1, item2, item3, item4];
