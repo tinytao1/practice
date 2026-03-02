@@ -116,16 +116,8 @@ const item3 = {
   limit_reached : false,
   button : document.querySelector('#i3'),
   counter : document.querySelector('#i3c'),
-};
-const item4 = {
-  name : 'Tempeh',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i4'),
-  counter : document.querySelector('#i4c'),
-  init() { // call to activate >> item4.init();
+
+  init() { // call to activate >> item3.init();
     this.button.addEventListener('click', () => this.select()); },
   add_1() {
     this.count++;
@@ -149,9 +141,7 @@ const item4 = {
   },
   disable_unselected_items() {
     s1_items.forEach(item => {
-      if (!item.selected) {
-        item.button.disabled = true; 
-      }
+      if (!item.selected) { item.button.disabled = true; }
     } );
   },
   drop_item() {
@@ -161,18 +151,104 @@ const item4 = {
     this.counter.style.color = "rgb(233,233,237)";
     this.counter.style.backgroundColor = "rgb(233,233,237)";
     this.counter.style.border = "none";
-
-
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "none";
+    if (s1.count == 0) { s1.counter.style.color = "rgb(233,233,237)"; }
     console.log(this.name + " count is: " + this.count); 
     console.log(s1.name + " count is: " + s1.count); 
+    this.enable_all_buttons();
+  },
+  enable_all_buttons() {
+    s1_items.forEach(item => {
+      item.button.disabled = false; 
+    } );
+  },
+  
+  select() {
+    if (s1.count == s1.limit) {
+      this.drop_item();
+    } else {
+        this.add_1();  
+        this.style_counter();    
+        this.style_section_counter();
+        if (s1.count == s1.limit) {
+          this.style_counter_limit_reached();
+          this.style_section_counter_limit_reached();
+          this.disable_unselected_items(); } 
+     }   
   },
 
+};
+const item4 = {
+  name : 'Tempeh',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i4'),
+  counter : document.querySelector('#i4c'),
+  
+  init() { // call to activate >> item4.init();
+    this.button.addEventListener('click', () => this.select()); },
+  add_1() {
+    this.count++;
+    this.selected = true;
+    s1.count++;
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count); },
+  style_counter() {
+    this.counter.style.color = "rgb(0,0,0)";
+    this.counter.textContent = this.count; },
+  style_section_counter() {
+    s1.counter.style.color = "rgb(0,0,0)";
+    s1.counter.textContent = s1.count; },
+  style_counter_limit_reached(){
+    this.counter.style.backgroundColor = "#ffe6e6";
+    this.counter.style.border = "1px solid red";
+  },
+  style_section_counter_limit_reached(){
+    s1.counter.style.backgroundColor = "#ffe6e6";
+    s1.counter.style.border = "1px solid red";
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        item.counter.style.backgroundColor = "#ffe6e6";
+        item.counter.style.border = "1px solid red";
+      }
+    } );
+  },
+  disable_unselected_items() {
+    s1_items.forEach(item => {
+      if (!item.selected) { item.button.disabled = true; }
+    } );
+  },
+  drop_item() {
+    s1.count = s1.count - this.count;
+    this.count = 0;
+    this.selected = false;
+    this.counter.style.color = "rgb(233,233,237)";
+    this.counter.style.backgroundColor = "rgb(233,233,237)";
+    this.counter.style.border = "none";
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "none";
+    if (s1.count == 0) { s1.counter.style.color = "rgb(233,233,237)"; }
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count); 
+    this.enable_all_buttons();
+    s1.counter.innerHTML = s1.count;
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        item.counter.style.backgroundColor = "rgb(233,233,237)";
+        item.counter.style.border = "none";
+      } 
+    } );
+  },
+  enable_all_buttons() {
+    s1_items.forEach(item => {
+      item.button.disabled = false; 
+    } );
+  },
 
-
-
-
-  display_counts() {},
-
+  
   select() {
     if (s1.count == s1.limit) {
       this.drop_item();
@@ -195,16 +271,11 @@ item3.button.innerHTML = item3.name;
 item4.button.innerHTML = item4.name;
 
 item4.init();
+item3.init();
 
 const s1_items = [item1, item2, item3, item4];
 
-function disable_unselected_items() {
-// Loop through IDs and disable
-s1_items.forEach(item => {
-  if (!item.selected) {
-    item.button.disabled = true; }
-});
-}
+
 
 
 
