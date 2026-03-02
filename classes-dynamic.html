@@ -133,13 +133,16 @@ const item4 = {
     console.log(this.name + " count is: " + this.count); 
     console.log(s1.name + " count is: " + s1.count);
   },
-  select() {
-    this.add_1();    
-     
+  style_counters() {
     this.counter.style.color = "rgb(0,0,0)";
     this.counter.textContent = this.count;
     s1.counter.style.color = "rgb(0,0,0)";
     s1.counter.textContent = s1.count;
+  },
+  
+  select() {
+    this.add_1();  
+    this.style_counters();    
   },
   
 };
