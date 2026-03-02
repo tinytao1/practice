@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title> classes dynamic</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {  }
-      
-      
-    .item-btn {margin-right: 5px;}
-    .item-div {margin-bottom:4px;}
+<title> classes dynamic</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.item-div { margin-bottom:4px;}
+.item-btn { margin-right: 5px;
+            border:1px solid rgb(143,143,157); border-radius: 9999px;
+            background-color: rgb(233,233,237); padding: 2px 5px; 
+            cursor: pointer; min-width: 180px; } 
+.counter {  padding: 1px 4px; 
+            background-color: rgb(233,233,237); 
+            color: rgb(233,233,237); 
+            border-radius: 9999px; 
+            font-family: Arial, Helvetica, sans-serif; } 
+.item-btn:hover { border:1px solid rgb(0,0,0); }
+.item-btn:active {background-color: #d5d5dd;}
 
-    .inactive-btn {border:1px solid rgb(143,143,157); border-radius: 9999px;
-             background-color: rgb(233,233,237); padding: 2px 5px; 
-             cursor: pointer; min-width: 180px;}
-    
-    .inactive-btn:active {background-color: #d5d5dd;}
+
+            /*  
+            
+            
+    .inactive-btn {}
+    margin-right: 10px;
     .inactive-btn:hover {border:1px solid rgb(0,0,0);}
 
-    /* The class to disable the hover effect */
+     The class to disable the hover effect 
     .disabled-btn:hover {
     /* Set the background-color to what it should be when disabled,
-    or use !important to ensure it overrides the :hover style */
+    or use !important to ensure it overrides the :hover style 
     border:1px solid rgb(143,143,157) !important; 
     cursor: default;}
 
-    .counter {margin-right: 10px; min-width: 10px; padding: 1px 4px; 
-              background-color: rgb(233,233,237); border-radius: 4px; 
-              color: rgb(233,233,237); font-family: Arial, Helvetica, sans-serif; } 
 
-    .inactive-counter { border:none  !important ;
-                        background-color: rgb(233,233,237) !important;
-                        color: rgb(233,233,237) !important ; }
+
+    .inactive-counter { border:none ;
+                        background-color: rgb(233,233,237) ;
+                        color: rgb(233,233,237);  }
+
     .active-counter { color: black; } 
+
     .active-counter-limit { color: black; border: 1px solid red;
                               background-color: #ffe6e6;}
 
-
+*/
   </style>
 </head>
 <body>
@@ -61,7 +69,7 @@
 </div>
 
 <div class="item-div">
-  <button id="i3" class="item-btn inactive-btn">Item 3</button>
+  <button id="i3" class="item-btn">Item 3</button>
   <span id="i3c" class="counter inactive-counter" >0</span>
 </div>
 
@@ -118,16 +126,23 @@ const item4 = {
   button : document.querySelector('#i4'),
   counter : document.querySelector('#i4c'),
 };
-
-item1.button.addEventListener('click', () => {
-  select();
-});
-
+/////////////////////////////////////////////////////////////////////////
 item1.button.innerHTML = item1.name;
 item2.button.innerHTML = item2.name;
 item3.button.innerHTML = item3.name;
 item4.button.innerHTML = item4.name;
 
+item1.button.addEventListener('click', () => {
+  select();
+});
+
+function select() {
+  
+}
+
+
+
+/*
 function select() {
   if (s1.count == s1.limit) {
     deactivate(s1); 
@@ -170,18 +185,6 @@ function select() {
   }
 }
 
-function activate(element) {
-  element.counter.classList.remove('inactive-counter');
-  element.counter.classList.add('active-counter');
-}
-function deactivate(element) {
-  element.counter.classList.remove('active-counter');
-  element.counter.classList.add('inactive-counter');
-}
-function activate_limit(element) {
-  element.counter.classList.remove('active-counter');
-  element.counter.classList.add('active-counter-limit');
-}
 function limit_reached_loop() {
   activate_limit(s1);
   disable_unselected_items();
@@ -206,15 +209,29 @@ s1_items.forEach(item => {
 }
 
 
+function disable_unselected_items() {
+// Loop through IDs and disable
+s1_items.forEach(item => {
+  if (!item.selected) {
+    item.button.disabled = true; // Sets the disabled attribute to true
+    item.button.classList.add('disabled-btn');
+  }
+});
+}
 
 
+// Select all elements with the class 'my-button'
+const buttons = document.querySelectorAll('.my-button');
 
-
-
-
-
-
-
+// Loop through each element in the NodeList and add a 'click' event listener
+buttons.forEach(button => {
+    button.addEventListener('click', function(event) {
+        // This function runs when a button is clicked
+        console.log('Button clicked!', event.target.textContent);
+        // 'event.target' refers to the specific button that was clicked
+    });
+});
+*/
 </script>
 </body>
 </html>
