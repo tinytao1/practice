@@ -125,6 +125,23 @@ const item4 = {
   limit_reached : false,
   button : document.querySelector('#i4'),
   counter : document.querySelector('#i4c'),
+  init() { // call to activate >> item4.init();
+    this.button.addEventListener('click', () => this.select()); },
+  add_1() {
+    this.count++;
+    s1.count++;
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count);
+  },
+  select() {
+    this.add_1();    
+     
+    this.counter.style.color = "rgb(0,0,0)";
+    this.counter.textContent = this.count;
+    s1.counter.style.color = "rgb(0,0,0)";
+    s1.counter.textContent = s1.count;
+  },
+  
 };
 /////////////////////////////////////////////////////////////////////////
 item1.button.innerHTML = item1.name;
@@ -132,17 +149,18 @@ item2.button.innerHTML = item2.name;
 item3.button.innerHTML = item3.name;
 item4.button.innerHTML = item4.name;
 
-item1.button.addEventListener('click', () => {
-  select();
-});
+item4.init();
 
-function select() {
-  
-}
+
 
 
 
 /*
+
+item1.button.addEventListener('click', () => {
+  select(item1);
+});
+
 function select() {
   if (s1.count == s1.limit) {
     deactivate(s1); 
