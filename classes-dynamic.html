@@ -656,13 +656,6 @@ const reset5 = {
   },
 
 
-  style_section_counter_RW() {
-    s1.counter.style.color = "rgb(233,233,237)"; // "rgb(0,0,0)";
-    s1.counter.textContent = s1.count; },
-  style_counter_limit_reached_RW(){
-    this.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
-    this.counter.style.border = "none"; // "1px solid red";
-  },
 
 };
 
@@ -685,29 +678,38 @@ const item4 = {
     console.log(s1.name + " count is: " + s1.count); },
 
 
-  style_item_counter() {
-    this.counter.style.color = "rgb(0,0,0)";
-    this.counter.innerHTML = this.count; },
+  style_item_counter() {  this.counter.style.color = "rgb(0,0,0)"; }, // text-visible
 
-  item_counter_style_reset(){ // No border, and text invisible.
+  reset_style_item_counter(){ // text invisible & no border
     this.counter.style.color = "rgb(233,233,237)";
     this.counter.style.backgroundColor = "rgb(233,233,237)";
     this.counter.style.border = "none";
   },
+  style_section_counter() { s1.counter.style.color = "rgb(0,0,0)"; }, // text-visible
 
+  reset_style_section_counter() { // text invisible & no border
+    s1.counter.style.color = "rgb(233,233,237)"; 
+    s1.counter.textContent = s1.count; },
+
+  style_counter_limit_reached_RW(){
+    this.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+    this.counter.style.border = "none"; // "1px solid red";
+  },
+   
   display_item_count_on_page() { this.counter.innerHTML = this.count; },
 
+  display_section_count_on_page() { s1.counter.innerHTML = s1.count; },
 
-  style_section_counter() {
-    s1.counter.style.color = "rgb(0,0,0)";
-    s1.counter.textContent = s1.count; },
-  style_counter_limit_reached(){
+  style_item_counter_limit_reached(){ 
     this.counter.style.backgroundColor = "#ffe6e6";
     this.counter.style.border = "1px solid red";
   },
-  style_section_counter_limit_reached(){
+
+  style_section_counter_limit_reached(){ // background pink & border red
     s1.counter.style.backgroundColor = "#ffe6e6";
-    s1.counter.style.border = "1px solid red";
+    s1.counter.style.border = "1px solid red"; },
+    
+  style_all_selected_item_counters_to_limit_reached(){ // background pink & border red
     s1_items.forEach(item => {
       if (item.selected) { 
         item.counter.style.backgroundColor = "#ffe6e6";
@@ -715,14 +717,14 @@ const item4 = {
       }
     } );
   },
-
-  style_section_counter_limit_reached_RW(){
-    s1.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
-    s1.counter.style.border = "none"; // "1px solid red";
+  //// RESUME HERE //////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////
+  reset_style_on_all_selected_item_counters_to_limit_released(){ // text invisible & no border
     s1_items.forEach(item => {
       if (item.selected) { 
-        item.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
-        item.counter.style.border = 'none'; // "1px solid red";
+        item.counter.style.backgroundColor = "#ffe6e6";
+        item.counter.style.border = "1px solid red";
       }
     } );
   },
@@ -791,6 +793,18 @@ const item4 = {
           this.style_section_counter_limit_reached();
           this.disable_unselected_items(); } 
      }   
+  },
+
+
+  ?style_section_counter_limit_reached_RW(){
+    s1.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+    s1.counter.style.border = "none"; // "1px solid red";
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        item.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+        item.counter.style.border = 'none'; // "1px solid red";
+      }
+    } );
   },
 
 };
@@ -899,4 +913,3 @@ buttons.forEach(button => {
 </script>
 </body>
 </html>
-
