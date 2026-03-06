@@ -78,6 +78,11 @@
   <span id="i4c" class="counter inactive-counter" >0</span>
 </div>
 
+<div class="item-div">
+  <button id="i5" class="item-btn inactive-btn">reset</button>
+  <span id="i5c" class="counter inactive-counter" >0</span>
+</div>
+
 </div> <!--section 1 end-->
 
 <script>
@@ -177,8 +182,42 @@ const item3 = {
           this.disable_unselected_items(); } 
      }   
   },
+};
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+
+const reset5 = {
+  name : 'reset5',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+  
+  init() { // call to activate >> reset5.init();
+    this.button.addEventListener('click', () => this.add_1_RS()); },
+
+  add_1_RW() {
+    this.count--;
+    this.selected = false;
+    s1.count--;
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count); 
+  },
+
+
+  style_section_counter_RW() {
+    s1.counter.style.color = "rgb(233,233,237)"; // "rgb(0,0,0)";
+    s1.counter.textContent = s1.count; },
+  style_counter_limit_reached_RW(){
+    this.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+    this.counter.style.border = "none"; // "1px solid red";
+  },
 
 };
+
 const item4 = {
   name : 'Tempeh',
   count : 0,
@@ -196,9 +235,21 @@ const item4 = {
     s1.count++;
     console.log(this.name + " count is: " + this.count); 
     console.log(s1.name + " count is: " + s1.count); },
-  style_counter() {
+
+
+  style_item_counter() {
     this.counter.style.color = "rgb(0,0,0)";
-    this.counter.textContent = this.count; },
+    this.counter.innerHTML = this.count; },
+
+  item_counter_style_reset(){ // No border, and text invisible.
+    this.counter.style.color = "rgb(233,233,237)";
+    this.counter.style.backgroundColor = "rgb(233,233,237)";
+    this.counter.style.border = "none";
+  },
+
+  display_item_count_on_page() { this.counter.innerHTML = this.count; },
+
+
   style_section_counter() {
     s1.counter.style.color = "rgb(0,0,0)";
     s1.counter.textContent = s1.count; },
@@ -216,25 +267,61 @@ const item4 = {
       }
     } );
   },
+
+  style_section_counter_limit_reached_RW(){
+    s1.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+    s1.counter.style.border = "none"; // "1px solid red";
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        item.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+        item.counter.style.border = 'none'; // "1px solid red";
+      }
+    } );
+  },
+
   disable_unselected_items() {
     s1_items.forEach(item => {
       if (!item.selected) { item.button.disabled = true; }
     } );
   },
-  drop_item() {
-    s1.count = s1.count - this.count;
-    this.count = 0;
-    this.selected = false;
+
+  enable_unselected_item_buttons() {
+    s1_items.forEach(item => {
+      if (!item.selected) { item.button.disabled = false; }
+    } );
+  },
+
+  remove_item_from_section_count() {s1.count = s1.count - this.count;},
+  item_count_to_zero(){this.count = 0;},
+  item_selected_to_false(){this.selected = false;},
+  item_counter_style_reset(){ // No border, and text invisible.
     this.counter.style.color = "rgb(233,233,237)";
     this.counter.style.backgroundColor = "rgb(233,233,237)";
     this.counter.style.border = "none";
+  },
+  section_counter_style_reset(){ // No border, and text invisible.
+    s1.counter.style.color = "rgb(233,233,237)";
     s1.counter.style.backgroundColor = "rgb(233,233,237)";
     s1.counter.style.border = "none";
+},
+  activate_all_item_buttons_in_section() {
+    s1_items.forEach(item => {
+      item.button.disabled = false; 
+    } );
+  },
+  log_item_count(){console.log(this.name + " count is: " + this.count);},
+  log_section_count(){console.log(s1.name + " count is: " + s1.count);},
+
+  display_section_count_on_page(){s1.counter.innerHTML = s1.count;},
+
+  drop_item() {
+
     if (s1.count == 0) { s1.counter.style.color = "rgb(233,233,237)"; }
-    console.log(this.name + " count is: " + this.count); 
-    console.log(s1.name + " count is: " + s1.count); 
-    this.enable_all_buttons();
-    s1.counter.innerHTML = s1.count;
+     
+    this.enable_unselected_item_buttons();
+
+    
+
     s1_items.forEach(item => {
       if (item.selected) { 
         item.counter.style.backgroundColor = "rgb(233,233,237)";
@@ -242,12 +329,7 @@ const item4 = {
       } 
     } );
   },
-  enable_all_buttons() {
-    s1_items.forEach(item => {
-      item.button.disabled = false; 
-    } );
-  },
-
+  
   
   select() {
     if (s1.count == s1.limit) {
@@ -272,6 +354,7 @@ item4.button.innerHTML = item4.name;
 
 item4.init();
 item3.init();
+reset5.init();
 
 const s1_items = [item1, item2, item3, item4];
 
