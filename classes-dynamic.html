@@ -248,6 +248,454 @@ const item4 = {
   },
 
   display_item_count_on_page() { this.counter.innerHTML = this.count; },
+  
+  display_section_count_on_page() { s1.counter.innerHTML = s1.count; },
+
+
+  style_section_counter() {s1.counter.style.color = "rgb(0,0,0)"; }, // text-visible, black
+
+  style_item_counter_limit_reached(){ // background pink, border red
+    this.counter.style.backgroundColor = "#ffe6e6";
+    this.counter.style.border = "1px solid red";
+  },
+
+  style_section_counter_limit_reached(){ // background pink, border red
+    s1.counter.style.backgroundColor = "#ffe6e6";
+    s1.counter.style.border = "1px solid red";
+  },
+  
+  style_all_selected_item_buttons_to_limit_reached() {
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        item.counter.style.backgroundColor = "#ffe6e6";
+        item.counter.style.border = "1px solid red";
+      }
+    } );
+  },
+
+  style_section_counter_to_limit_reached(){
+    s1.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+    s1.counter.style.border = "none"; // "1px solid red";
+  },
+
+  disable_all_item_buttons_that_are_unselected() {
+    s1_items.forEach(item => {
+      if (!item.selected) { item.button.disabled = true; }
+    } );
+  },
+
+  enable_all_item_buttons_that_are_unselected() {
+    s1_items.forEach(item => {
+      if (!item.selected) { item.button.disabled = false; }
+    } );
+  },
+
+  remove_item_from_section_count() {s1.count = s1.count - this.count;},
+
+  item_count_to_zero(){this.count = 0;},
+
+  item_selected_to_false(){this.selected = false;},
+
+  item_counter_style_reset(){ // No border & text invisible.
+    this.counter.style.color = "rgb(233,233,237)";
+    this.counter.style.backgroundColor = "rgb(233,233,237)";
+    this.counter.style.border = "none";
+  },
+  section_counter_style_reset(){ // No border & text invisible.
+    s1.counter.style.color = "rgb(233,233,237)";
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "none";
+},
+  activate_all_item_buttons_in_section() {
+    s1_items.forEach(item => {
+      item.button.disabled = false; 
+    } );
+  },
+  log_item_count(){console.log(this.name + " count is: " + this.count);},
+
+  log_section_count(){console.log(s1.name + " count is: " + s1.count);},
+
+  display_section_count_on_page(){s1.counter.innerHTML = s1.count;},
+
+  drop_item() {
+
+    if (s1.count == 0) {  }
+     
+    this.enable_unselected_item_buttons();
+
+    
+  },
+  
+  
+  select() {
+    if (s1.count == s1.limit) {
+      this.drop_item();
+    } else {
+        this.add_1();  
+        this.style_counter();    
+        this.style_section_counter();
+        if (s1.count == s1.limit) {
+          this.style_counter_limit_reached();
+          this.style_section_counter_limit_reached();
+          this.disable_unselected_items(); } 
+     }   
+  },
+
+};
+/////////////////////////////////////////////////////////////////////////
+item1.button.innerHTML = item1.name;
+item2.button.innerHTML = item2.name;
+item3.button.innerHTML = item3.name;
+item4.button.innerHTML = item4.name;
+
+item4.init();
+item3.init();
+reset5.init();
+
+const s1_items = [item1, item2, item3, item4];
+
+
+
+
+
+/*
+
+item1.button.addEventListener('click', () => {
+  select(item1);
+});
+
+function select() {
+  if (s1.count == s1.limit) {
+    deactivate(s1); 
+    deactivate(item1);
+    s1.count = s1.count - item1.count;
+    item1.count = 0;
+    
+    item1.selected = false;
+    s1.limit_reached = false;
+    item1.limit_reached = false;
+    item1.counter.innerHTML = item1.count;
+    s1.counter.innerHTML = item1.count;
+    console.log("item 1 count: " + item1.count);
+    console.log("s1 count: " + s1.count);
+  }
+
+  else if (item1.count == 0) {
+    activate(item1);
+    if (s1.count == 0) { activate(s1); }
+    item1.count++;
+    item1.selected = true;
+    s1.count++;
+    item1.counter.textContent = item1.count;
+    s1.counter.textContent = item1.count;
+    console.log("item 1 count: " + item1.count);
+    console.log("s1 count: " + s1.count);
+    } else {
+    item1.count++;
+    item1.selected = true;
+    s1.count++;
+    item1.counter.textContent = item1.count;
+    s1.counter.textContent = item1.count;
+    console.log("item 1 count: " + item1.count);
+    console.log("s1 count: " + s1.count);
+  }
+  if (s1.count == s1.limit) {
+    s1.limit_reached = true;
+    item1.limit_reached = true;
+    limit_reached_loop();
+  }
+}
+
+function limit_reached_loop() {
+  activate_limit(s1);
+  disable_unselected_items();
+  // Loop through IDs and disable
+  s1_items.forEach(item => {
+    if (item.limit_reached) {
+      activate_limit(item);
+    }
+  });
+}
+// Array of button IDs
+
+function disable_unselected_items() {
+// Loop through IDs and disable
+s1_items.forEach(item => {
+  if (!item.selected) {
+    item.button.disabled = true; // Sets the disabled attribute to true
+    item.button.classList.add('disabled-btn');
+  }
+});
+}
+
+
+
+
+
+// Select all elements with the class 'my-button'
+const buttons = document.querySelectorAll('.my-button');
+
+// Loop through each element in the NodeList and add a 'click' event listener
+buttons.forEach(button => {
+    button.addEventListener('click', function(event) {
+        // This function runs when a button is clicked
+        console.log('Button clicked!', event.target.textContent);
+        // 'event.target' refers to the specific button that was clicked
+    });
+});
+*/
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<title> classes dynamic</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.item-div { margin-bottom:4px;}
+.item-btn { margin-right: 5px;
+            border:1px solid rgb(143,143,157); border-radius: 9999px;
+            background-color: rgb(233,233,237); padding: 2px 5px; 
+            cursor: pointer; min-width: 180px; } 
+.counter {  padding: 1px 4px; 
+            background-color: rgb(233,233,237); 
+            color: rgb(233,233,237); 
+            border-radius: 9999px; 
+            font-family: Arial, Helvetica, sans-serif; } 
+.item-btn:hover { border:1px solid rgb(0,0,0); }
+.item-btn:active {background-color: #d5d5dd;}
+
+
+            /*  
+            
+            
+    .inactive-btn {}
+    margin-right: 10px;
+    .inactive-btn:hover {border:1px solid rgb(0,0,0);}
+
+     The class to disable the hover effect 
+    .disabled-btn:hover {
+    /* Set the background-color to what it should be when disabled,
+    or use !important to ensure it overrides the :hover style 
+    border:1px solid rgb(143,143,157) !important; 
+    cursor: default;}
+
+
+
+    .inactive-counter { border:none ;
+                        background-color: rgb(233,233,237) ;
+                        color: rgb(233,233,237);  }
+
+    .active-counter { color: black; } 
+
+    .active-counter-limit { color: black; border: 1px solid red;
+                              background-color: #ffe6e6;}
+
+*/
+  </style>
+</head>
+<body>
+
+<div class="section" id="s1">
+
+<p>Proteins 
+  <span>count: </span>
+  <span class="counter inactive-counter" id="s1c">
+    0</span>
+</p>
+<p>(choose 2)</p>
+
+<div class="item-div">
+  <button id="i1" class="item-btn inactive-btn ">Item 1</button>
+  <span id="i1c" class="counter inactive-counter">0</span>
+</div>
+
+<div class="item-div">
+  <button id="i2" class="item-btn inactive-btn">Item 2</button>
+  <span id="i2c" class="counter inactive-counter" >0</span>
+</div>
+
+<div class="item-div">
+  <button id="i3" class="item-btn">Item 3</button>
+  <span id="i3c" class="counter inactive-counter" >0</span>
+</div>
+
+<div class="item-div">
+  <button id="i4" class="item-btn inactive-btn">Item 4</button>
+  <span id="i4c" class="counter inactive-counter" >0</span>
+</div>
+
+<div class="item-div">
+  <button id="i5" class="item-btn inactive-btn">reset</button>
+  <span id="i5c" class="counter inactive-counter" >0</span>
+</div>
+
+</div> <!--section 1 end-->
+
+<script>
+
+const s1 = {
+  name : 'Proteins',
+  count : 0,
+  limit : 2,
+  limit_reached : false,
+  counter : document.querySelector('#s1c'),
+};
+
+const item1 = {
+  name : 'Tilapia',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i1'),
+  counter : document.querySelector('#i1c'),
+};
+const item2 = {
+  name : 'Chicken Breast',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i2'),
+  counter : document.querySelector('#i2c'),
+};
+const item3 = {
+  name : 'Pork Chop',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i3'),
+  counter : document.querySelector('#i3c'),
+
+  init() { // call to activate >> item3.init();
+    this.button.addEventListener('click', () => this.select()); },
+  add_1() {
+    this.count++;
+    this.selected = true;
+    s1.count++;
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count); },
+  style_counter() {
+    this.counter.style.color = "rgb(0,0,0)";
+    this.counter.textContent = this.count; },
+  style_section_counter() {
+    s1.counter.style.color = "rgb(0,0,0)";
+    s1.counter.textContent = s1.count; },
+  style_counter_limit_reached(){
+    this.counter.style.backgroundColor = "#ffe6e6";
+    this.counter.style.border = "1px solid red";
+  },
+  style_section_counter_limit_reached(){
+    s1.counter.style.backgroundColor = "#ffe6e6";
+    s1.counter.style.border = "1px solid red";
+  },
+  disable_unselected_items() {
+    s1_items.forEach(item => {
+      if (!item.selected) { item.button.disabled = true; }
+    } );
+  },
+  drop_item() {
+    s1.count = s1.count - this.count;
+    this.count = 0;
+    this.selected = false;
+    this.counter.style.color = "rgb(233,233,237)";
+    this.counter.style.backgroundColor = "rgb(233,233,237)";
+    this.counter.style.border = "none";
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "none";
+    if (s1.count == 0) { s1.counter.style.color = "rgb(233,233,237)"; }
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count); 
+    this.enable_all_buttons();
+  },
+  enable_all_buttons() {
+    s1_items.forEach(item => {
+      item.button.disabled = false; 
+    } );
+  },
+  
+  select() {
+    if (s1.count == s1.limit) {
+      this.drop_item();
+    } else {
+        this.add_1();  
+        this.style_counter();    
+        this.style_section_counter();
+        if (s1.count == s1.limit) {
+          this.style_counter_limit_reached();
+          this.style_section_counter_limit_reached();
+          this.disable_unselected_items(); } 
+     }   
+  },
+};
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+
+const reset5 = {
+  name : 'reset5',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+  
+  init() { // call to activate >> reset5.init();
+    this.button.addEventListener('click', () => this.add_1_RS()); },
+
+  add_1_RW() {
+    this.count--;
+    this.selected = false;
+    s1.count--;
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count); 
+  },
+
+
+  style_section_counter_RW() {
+    s1.counter.style.color = "rgb(233,233,237)"; // "rgb(0,0,0)";
+    s1.counter.textContent = s1.count; },
+  style_counter_limit_reached_RW(){
+    this.counter.style.backgroundColor = "rgb(233,233,237)"; // "#ffe6e6" pale pink
+    this.counter.style.border = "none"; // "1px solid red";
+  },
+
+};
+
+const item4 = {
+  name : 'Tempeh',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i4'),
+  counter : document.querySelector('#i4c'),
+  
+  init() { // call to activate >> item4.init();
+    this.button.addEventListener('click', () => this.select()); },
+  add_1() {
+    this.count++;
+    this.selected = true;
+    s1.count++;
+    console.log(this.name + " count is: " + this.count); 
+    console.log(s1.name + " count is: " + s1.count); },
+
+
+  style_item_counter() {
+    this.counter.style.color = "rgb(0,0,0)";
+    this.counter.innerHTML = this.count; },
+
+  item_counter_style_reset(){ // No border, and text invisible.
+    this.counter.style.color = "rgb(233,233,237)";
+    this.counter.style.backgroundColor = "rgb(233,233,237)";
+    this.counter.style.border = "none";
+  },
+
+  display_item_count_on_page() { this.counter.innerHTML = this.count; },
 
 
   style_section_counter() {
@@ -451,3 +899,4 @@ buttons.forEach(button => {
 </script>
 </body>
 </html>
+
