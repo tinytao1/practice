@@ -144,12 +144,20 @@ const reset_s1 = {
     console.log("S1 count is " + s1.count + ", limit reached " + s1.limit_reached );
   },
 
-  log_all_item_counts() { 
-    if (false) {
+  log_all_items_status() { 
+    if (item1.count + item2.count + item3.count + item4.count == 0) {
       console.log("All item counts are 0");
     } else {
         s1_items.forEach(item => {
           console.log(item.name + " count is " + item.count);
+        } 
+        );
+    }
+    if (!item1.selected && !item2.selected && !item3.selected && !item4.selected) {
+      console.log("All item selecteds are false");
+    } else {
+        s1_items.forEach(item => {
+          console.log(item.name + " selected " + item.selected);
         } 
         );
     }
@@ -172,8 +180,29 @@ const reset_s1 = {
   set_all_item_selecteds_to_false(){
     s1_items.forEach(item => {
       item.selected = false;
-      console.log(item.name + " selected " + item.selected);
     })
+  },
+
+  style_section_counter_to_empty() { // text invisible & no border
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.color = "rgb(233,233,237)"; 
+    s1.counter.style.border = "none";
+    s1.counter.innerHTML = s1.count;
+   },
+
+  style_all_item_counters_to_empty(){
+    s1_items.forEach(item => {
+      item.counter.style.backgroundColor = "rgb(233,233,237)";
+      item.counter.style.color = "rgb(233,233,237)"; 
+      item.counter.style.border = "none";
+      item.counter.innerHTML = item.count;
+    });
+  },
+
+  enable_all_item_buttons(){
+    s1_items.forEach(item => {
+      item.button.disabled = false;
+    });
   },
 
   /* s1_items.forEach(item => {
@@ -188,12 +217,13 @@ const reset_s1 = {
     this.set_section_count_to_zero();
     this.set_section_limit_reached_to_false();
     this.log_section_status();
-    //this.style_section_counter_to_empty();
+    this.style_section_counter_to_empty(); 
+    this.enable_all_item_buttons();
 
     this.set_all_item_counts_to_zero();
     this.set_all_item_selecteds_to_false();
-    //this.style_all_item_counters_to_empty();
-    this.log_all_item_counts();
+    this.log_all_items_status();
+    this.style_all_item_counters_to_empty();    
   },
 };
 
@@ -310,7 +340,7 @@ const item4 = {
     } );
   },
 
-  remove_item_from_section_count() {s1.count = s1.count - this.count;},
+  
 
   set_item_count_to_zero(){this.count = 0;},
 
@@ -373,29 +403,46 @@ const item4 = {
       this.style_item_counter_to_limit_reached();
       this.style_section_counter_to_limit_reached();
       this.disable_unselected_item_buttons();
+      this.log_section_status();
     }
+  },
+
+  log_section_status(){ 
+    console.log("S1 count is " + s1.count + ", limit reached " + s1.limit_reached );
+  },
+  remove_item_from_section_count() {
+    s1.count = s1.count - this.count;
+  },
+  
+  display_all_section_counts(){
+    s1.counter.innerHTML = s1.count;
+    s1_items.forEach(item => {
+      item.counter.innerHTML = item.count;
+    });
+  },
+  drop_item_from_section(){
+    this.count = 0;
   },
 
   select_item_from_section_limit_reached(){
     if (s1.limit_reached) {
       this.remove_item_from_section_count();
-      this.set_item_selected_to_false();
       this.set_section_limit_reached_to_false();
-      this.style_item_counter_to_empty();
-      this.style_section_counter_to_selected();
-      this.enable_unselected_item_buttons();
-      this.log_item_count();
-      this.log_section_count();
-      // if (s1.count == 0) { ; }
+      this.log_section_status();
+      this.drop_item_from_section();
+      this.display_all_section_counts();
+      //this.style_item_counters : 0, selected, or at limit
       
 
     }
   },
 
   select(){
-    this.select_item_from_section_limit_reached();
-    this.select_item_from_zero();
-
+    if (s1.limit_reached) {
+      this.select_item_from_section_limit_reached();
+    } else {
+      this.select_item_from_zero();
+    }
   },
 
 };
