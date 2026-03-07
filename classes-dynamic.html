@@ -78,12 +78,12 @@
   <button id="i4" class="item-btn inactive-btn">Item 4</button>
   <span id="i4c" class="counter inactive-counter" >0</span>
 </div>
-<!--
+
 <div class="item-div">
   <button id="i5" class="item-btn inactive-btn">reset</button>
   <span id="i5c" class="counter inactive-counter" >0</span>
 </div>
--->
+
 </div> <!--section 1 end-->
 
 <script>
@@ -128,7 +128,74 @@ const item3 = {
     this.button.addEventListener('click', () => this.select()); },
 };
 
+const reset_s1 = {
+  name : 'rest section',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
 
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+
+  log_section_status(){ 
+    console.log("S1 count is " + s1.count + ", limit reached " + s1.limit_reached );
+  },
+
+  log_all_item_counts() { 
+    if (false) {
+      console.log("All item counts are 0");
+    } else {
+        s1_items.forEach(item => {
+          console.log(item.name + " count is " + item.count);
+        } 
+        );
+    }
+  },
+
+  set_section_count_to_zero(){
+    s1.count = 0;
+  },
+
+  set_all_item_counts_to_zero(){
+    s1_items.forEach(item => {
+      item.count = 0;
+    })
+  },
+
+  set_section_limit_reached_to_false(){ 
+    s1.limit_reached = false;
+  },
+
+  set_all_item_selecteds_to_false(){
+    s1_items.forEach(item => {
+      item.selected = false;
+      console.log(item.name + " selected " + item.selected);
+    })
+  },
+
+  /* s1_items.forEach(item => {
+      if (item.selected) { 
+        item.counter.style.backgroundColor = "#ffe6e6";
+        // item.counter.style.color = rgb(0,0,0);
+        item.counter.style.border = "1px solid red";
+      }
+    } );*/
+
+  reset_section() {
+    this.set_section_count_to_zero();
+    this.set_section_limit_reached_to_false();
+    this.log_section_status();
+    //this.style_section_counter_to_empty();
+
+    this.set_all_item_counts_to_zero();
+    this.set_all_item_selecteds_to_false();
+    //this.style_all_item_counters_to_empty();
+    this.log_all_item_counts();
+  },
+};
 
 
 
@@ -169,16 +236,16 @@ const item4 = {
   },
 
   set_item_selected_to_true(){
-    this.item.selected = true;
+    this.selected = true;
   },
 
   set_item_selected_to_false(){
-    this.item.selected = false;
+    this.selected = false;
   },
 
   style_item_counter_to_selected() {  this.counter.style.color = "rgb(0,0,0)"; }, // text-visible
 
-  style_item_counter_to_unselected(){ // text invisible & no border
+  style_item_counter_to_empty(){ // text invisible & no border
     this.counter.style.color = "rgb(233,233,237)";
     this.counter.style.backgroundColor = "rgb(233,233,237)";
     this.counter.style.border = "none";
@@ -190,7 +257,7 @@ const item4 = {
     this.counter.style.border = "none";
   },
   
-  style_section_counter_to_unselected() { // text invisible & no border
+  style_section_counter_to_empty() { // text invisible & no border
     s1.counter.style.backgroundColor = "rgb(233,233,237)";
     s1.counter.style.color = "rgb(233,233,237)"; 
     s1.counter.style.border = "none";
@@ -200,13 +267,13 @@ const item4 = {
 
   display_section_count_on_page() { s1.counter.innerHTML = s1.count; },
 
-  style_item_counter_limit_reached(){ // background pink & border red
+  style_item_counter_to_limit_reached(){ // background pink & border red
     this.counter.style.backgroundColor = "#ffe6e6";
     this.counter.style.color = "rgb(0,0,0)"; 
     this.counter.style.border = "1px solid red";
   },
 
-  style_section_counter_limit_reached(){ // background pink & border red
+  style_section_counter_to_limit_reached(){ // background pink & border red
     s1.counter.style.backgroundColor = "#ffe6e6";
     s1.counter.style.color = "rgb(0,0,0)"; 
     s1.counter.style.border = "1px solid red"; },
@@ -245,7 +312,9 @@ const item4 = {
 
   remove_item_from_section_count() {s1.count = s1.count - this.count;},
 
-  item_count_to_zero(){this.count = 0;},
+  set_item_count_to_zero(){this.count = 0;},
+
+  set_section_count_to_zero() { s1.count = 0; },
 
   item_selected_to_false(){this.selected = false;},
 
@@ -291,17 +360,18 @@ const item4 = {
   
   select_item_from_zero() {
     this.add_1();
+    this.set_item_selected_to_true();
     this.log_item_count();
     this.log_section_count();
-    this.style_item_counter_as_selected();
-    this.style_section_counter_as_selected();
+    this.style_item_counter_to_selected();
+    this.style_section_counter_to_selected();
     this.display_item_count_on_page();
     this.display_section_count_on_page();
 
     if (s1.count == s1.limit) {
       this.set_section_limit_reached_to_true();
-      this.style_item_counter_limit_reached();
-      this.style_section_counter_limit_reached();
+      this.style_item_counter_to_limit_reached();
+      this.style_section_counter_to_limit_reached();
       this.disable_unselected_item_buttons();
     }
   },
@@ -309,11 +379,14 @@ const item4 = {
   select_item_from_section_limit_reached(){
     if (s1.limit_reached) {
       this.remove_item_from_section_count();
-      this.style_item_counter_to_selected();
-      style_section_counter_as_selected
+      this.set_item_selected_to_false();
+      this.set_section_limit_reached_to_false();
+      this.style_item_counter_to_empty();
+      this.style_section_counter_to_selected();
       this.enable_unselected_item_buttons();
       this.log_item_count();
       this.log_section_count();
+      // if (s1.count == 0) { ; }
       
 
     }
@@ -323,11 +396,11 @@ const item4 = {
     this.select_item_from_section_limit_reached();
     this.select_item_from_zero();
 
-
-
   },
 
 };
+
+
 /////////////////////////////////////////////////////////////////////////
 item1.button.innerHTML = item1.name;
 item2.button.innerHTML = item2.name;
@@ -336,7 +409,9 @@ item4.button.innerHTML = item4.name;
 
 item4.init();
 item3.init();
-reset5.init();
+reset_s1.init();
+
+// RESET FUNCTION /// //   //  //  ///
 
 const s1_items = [item1, item2, item3, item4];
 
