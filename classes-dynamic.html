@@ -78,15 +78,16 @@
   <button id="i4" class="item-btn inactive-btn">Item 4</button>
   <span id="i4c" class="counter inactive-counter" >0</span>
 </div>
-
+<!--
 <div class="item-div">
   <button id="i5" class="item-btn inactive-btn">reset</button>
   <span id="i5c" class="counter inactive-counter" >0</span>
 </div>
-
+-->
 </div> <!--section 1 end-->
 
 <script>
+'use strict'
 
 const s1 = {
   name : 'Proteins',
@@ -126,24 +127,29 @@ const item3 = {
   init() { // call to activate >> item3.init();
     this.button.addEventListener('click', () => this.select()); },
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-
-
-const reset5 = {
-  name : 'reset5',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i5'),
-  counter : document.querySelector('#i5c'),
-  
-  init() { // call to activate >> reset5.init();
-    this.button.addEventListener('click', () => this.add_1_RS()); },
-
-  
-};
 
 const item4 = {
   name : 'Tempeh',
@@ -170,17 +176,21 @@ const item4 = {
     this.item.selected = false;
   },
 
-  style_item_counter_as_selected() {  this.counter.style.color = "rgb(0,0,0)"; }, // text-visible
+  style_item_counter_to_selected() {  this.counter.style.color = "rgb(0,0,0)"; }, // text-visible
 
-  style_item_counter_as_unselected(){ // text invisible & no border
+  style_item_counter_to_unselected(){ // text invisible & no border
     this.counter.style.color = "rgb(233,233,237)";
     this.counter.style.backgroundColor = "rgb(233,233,237)";
     this.counter.style.border = "none";
   },
 
-  style_section_counter_as_selected() { s1.counter.style.color = "rgb(0,0,0)"; }, // text-visible
-
-  style_section_counter_as_unselected() { // text invisible & no border
+  style_section_counter_to_selected() { // text-visible, plain background, no border
+    s1.counter.style.color = "rgb(0,0,0)"; 
+    this.counter.style.backgroundColor = "rgb(233,233,237)";
+    this.counter.style.border = "none";
+  },
+  
+  style_section_counter_to_unselected() { // text invisible & no border
     s1.counter.style.backgroundColor = "rgb(233,233,237)";
     s1.counter.style.color = "rgb(233,233,237)"; 
     s1.counter.style.border = "none";
@@ -254,8 +264,15 @@ const item4 = {
       item.button.disabled = false; 
     } );
   },
+
   log_item_count(){console.log(this.name + " count is: " + this.count);},
+
   log_section_count(){console.log(s1.name + " count is: " + s1.count);},
+
+  set_section_limit_reached_to_true() {s1.limit_reached = true;},
+
+  set_section_limit_reached_to_false() {s1.limit_reached = false;},
+  
 /*
   drop_item() {
 
@@ -272,7 +289,7 @@ const item4 = {
   },
   */
   
-  select_from_zero() {
+  select_item_from_zero() {
     this.add_1();
     this.log_item_count();
     this.log_section_count();
@@ -281,16 +298,33 @@ const item4 = {
     this.display_item_count_on_page();
     this.display_section_count_on_page();
 
-    if (s1.counter == s1.limit) {
+    if (s1.count == s1.limit) {
+      this.set_section_limit_reached_to_true();
       this.style_item_counter_limit_reached();
       this.style_section_counter_limit_reached();
+      this.disable_unselected_item_buttons();
     }
+  },
 
+  select_item_from_section_limit_reached(){
+    if (s1.limit_reached) {
+      this.remove_item_from_section_count();
+      this.style_item_counter_to_selected();
+      style_section_counter_as_selected
+      this.enable_unselected_item_buttons();
+      this.log_item_count();
+      this.log_section_count();
+      
+
+    }
   },
 
   select(){
-    
-    this.select_from_zero();
+    this.select_item_from_section_limit_reached();
+    this.select_item_from_zero();
+
+
+
   },
 
 };
