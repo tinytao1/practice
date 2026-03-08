@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title> classes dynamic</title>
+<title> Menu example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -30,7 +30,7 @@
   <span class="counter inactive-counter" id="s1c">
     0</span>
 </p>
-<p>(choose 2)</p>
+<p>(choose 4)</p>
 
 <div class="item-div">
   <button id="i1" class="item-btn inactive-btn ">Item 1</button>
@@ -65,7 +65,7 @@
 const s1 = {
   name : 'Proteins',
   count : 0,
-  limit : 2,
+  limit : 4,
   limit_reached : false,
   counter : document.querySelector('#s1c'),
 };
@@ -158,12 +158,16 @@ const section_methods_collection = {
     this.counter.style.border = "none";
   },
 
-  style_item_counter_to_selected() {  this.counter.style.color = "rgb(0,0,0)"; }, // text-visible
+  style_item_counter_to_selected() {   // text-visible & background green #beecc7 
+    this.counter.style.color = "rgb(0,0,0)";
+    this.counter.style.backgroundColor = "#beecc7"; //green
+    this.counter.style.border = "1px solid #2b943e";
+   }, 
 
   style_item_counter_to_limit_reached(){ // background pink & border red
-      this.counter.style.backgroundColor = "#ffe6e6";
+      this.counter.style.backgroundColor = "#beecc7";
       this.counter.style.color = "rgb(0,0,0)"; 
-      this.counter.style.border = "1px solid red";
+      //this.counter.style.border = "1px solid red";
   },
 
   //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
@@ -179,13 +183,14 @@ const section_methods_collection = {
    style_section_counter_to_selected() { // text-visible, plain background, no border
     s1.counter.style.color = "rgb(0,0,0)"; 
     s1.counter.style.backgroundColor = "rgb(233,233,237)";
-    s1.counter.style.border = "none";
+    s1.counter.style.border = "1px solid black";
   },
   
   style_section_counter_to_limit_reached(){ // background pink & border red
     s1.counter.style.backgroundColor = "#ffe6e6";
     s1.counter.style.color = "rgb(0,0,0)"; 
-    s1.counter.style.border = "1px solid red"; },
+    s1.counter.style.border = "1px solid red";
+   },
   
      //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
 ///////////////////////////////////////////////////////////////
@@ -200,9 +205,8 @@ const section_methods_collection = {
   style_all_selected_item_counters_to_selected(){ // text invisible & no border
     s1_items.forEach(item => {
       if (item.selected) { 
-        item.counter.style.backgroundColor = "rgb(233,233,237)";
-        // item.counter.style.color = "rgb(0,0,0)";
-        item.counter.style.border = "none";
+        item.counter.style.backgroundColor = "#beecc7";
+        item.counter.style.border = "1px solid #2b943e";
       }
     } );
   },
@@ -210,9 +214,8 @@ const section_methods_collection = {
   style_all_selected_item_counters_to_limit_reached(){ // background pink & border red
     s1_items.forEach(item => {
       if (item.selected) { 
-        item.counter.style.backgroundColor = "#ffe6e6";
-        // item.counter.style.color = rgb(0,0,0);
-        item.counter.style.border = "1px solid red";
+        item.counter.style.backgroundColor = "#beecc7";
+        //item.counter.style.border = "1px solid red";
       }
     } );
   },
@@ -239,12 +242,6 @@ const section_methods_collection = {
   set_section_count_to_zero() { s1.count = 0; },
 
   set_item_selected_to_false(){this.selected = false;},
-
-  item_counter_style_unselected(){ // No border, and text invisible.
-    this.counter.style.color = "rgb(233,233,237)";
-    this.counter.style.backgroundColor = "rgb(233,233,237)";
-    this.counter.style.border = "none";
-  },
 
   activate_all_item_buttons_in_section() {
     s1_items.forEach(item => {
