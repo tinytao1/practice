@@ -18,35 +18,7 @@
             font-family: Arial, Helvetica, sans-serif; } 
 .item-btn:hover { border:1px solid rgb(0,0,0); }
 .item-btn:active {background-color: #d5d5dd;}
-
-
-            /*  
-            
-            
-    .inactive-btn {}
-    margin-right: 10px;
-    .inactive-btn:hover {border:1px solid rgb(0,0,0);}
-
-     The class to disable the hover effect 
-    .disabled-btn:hover {
-    /* Set the background-color to what it should be when disabled,
-    or use !important to ensure it overrides the :hover style 
-    border:1px solid rgb(143,143,157) !important; 
-    cursor: default;}
-
-
-
-    .inactive-counter { border:none ;
-                        background-color: rgb(233,233,237) ;
-                        color: rgb(233,233,237);  }
-
-    .active-counter { color: black; } 
-
-    .active-counter-limit { color: black; border: 1px solid red;
-                              background-color: #ffe6e6;}
-
-*/
-  </style>
+</style>
 </head>
 <body>
 
@@ -101,7 +73,8 @@ const section_methods_collection = {
 
   init() { // call to activate >> item4.init();
     this.button.addEventListener('click', () => this.select()); },
-
+/*
+*/
   add_1() {
     this.count++;
     s1.count++;
@@ -371,7 +344,74 @@ const section_methods_collection = {
 
 };
 
+
+Object.setPrototypeOf(item1, section_methods_collection);
+
+
+item1.name = 'Tilapia';
+item1.count = 0;
+item1.limit = null;
+item1.selected = false;
+item1.limit_reached = false;
+item1.button = document.querySelector('#i1');
+item1.counter = document.querySelector('#i1c');
+
+
+item2.name = 'Chicken Breast';
+item2.count = 0;
+item2.limit = null;
+item2.selected = false;
+item2.limit_reached = false;
+item2.button = document.querySelector('#i2');
+item2.counter = document.querySelector('#i2c');
+
+
+item3.name = 'Pork Chop';
+item3.count = 0;
+item3.limit = null;
+item3.selected = false;
+item3.limit_reached = false;
+item3.button = document.querySelector('#i3');
+item3.counter = document.querySelector('#i3c');
+
+item4.name = 'Tempeh';
+item4.count = 0;
+item4.limit = null;
+item4.selected = false;
+item4.limit_reached = false;
+item4.button = document.querySelector('#i4');
+item4.counter = document.querySelector('#i4c');
+
+/////////////////////////////////////////////////////////////////////////
+item1.button.innerHTML = item1.name;
+item2.button.innerHTML = item2.name;
+item3.button.innerHTML = item3.name;
+item4.button.innerHTML = item4.name;
+
+item4.init();
+item3.init();
+reset_s1.init();
+
+const s1_items = [item1, item2, item3, item4];
+
+
 /*
+item3.init = function() {                           // call to activate >> item3.init();
+    this.button.addEventListener('click', () => this.select());
+};
+const reset_s1 = {
+  name : 'rest section',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+};
+
 ADDING PROPERTIES 
 Using Dot Notation After Creation (Post-Initialization)
 
@@ -400,77 +440,27 @@ item2.show(); // Alerts: "This is eggs"
 item3.show(); // Alerts: "This is milk"
 item4.show(); // Alerts: "This is cheese"
 
+ADD A METHOD  //////////////////////////
+
+item3.sayHello = function() {
+    console.log("Hello, I am " + this.name);
+};
+
+// Test it
+item3.sayHello(); // Output: "Hello, I am milk"
+item3.show();     // Output: "This is milk" (inherited from item1)
+
+//////////////  EMPTY ITEM   ///////////////////
+
+item.name = '';
+item.count = 0;
+item.limit = null;
+item.selected = false;
+item.limit_reached = false;
+item.button = document.querySelector('#i');
+item.counter = document.querySelector('#ic');
+
 */
-
-const item1 = {
-  name : 'Tilapia',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i1'),
-  counter : document.querySelector('#i1c'),
-};
-
-const item2 = {
-  name : 'Chicken Breast',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i2'),
-  counter : document.querySelector('#i2c'),
-};
-
-
-const item3 = {
-  name : 'Pork Chop',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i3'),
-  counter : document.querySelector('#i3c'),
-
-  init() { // call to activate >> item3.init();
-    this.button.addEventListener('click', () => this.select()); },
-};
-
-const reset_s1 = {
-  name : 'rest section',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i5'),
-  counter : document.querySelector('#i5c'),
-
-  init() { // call to activate >> reset_section.init();
-    this.button.addEventListener('click', () => this.reset_section()); },
-};
-
-const item4 = {
-  name : 'Tempeh',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i4'),
-  counter : document.querySelector('#i4c'),
-};
-
-/////////////////////////////////////////////////////////////////////////
-item1.button.innerHTML = item1.name;
-item2.button.innerHTML = item2.name;
-item3.button.innerHTML = item3.name;
-item4.button.innerHTML = item4.name;
-
-item4.init();
-item3.init();
-reset_s1.init();
-
-const s1_items = [item1, item2, item3, item4];
-
 
 
 
