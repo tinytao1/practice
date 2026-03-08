@@ -117,8 +117,8 @@ const section_methods_collection = {
    
    style_section_counter_to_selected() { // text-visible, plain background, no border
     s1.counter.style.color = "rgb(0,0,0)"; 
-    this.counter.style.backgroundColor = "rgb(233,233,237)";
-    this.counter.style.border = "none";
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "none";
   },
   
   style_section_counter_to_limit_reached(){ // background pink & border red
@@ -130,9 +130,21 @@ const section_methods_collection = {
 ///////////////////////////////////////////////////////////////
 ////////////   SECTION COUNTER  /////////////////
 
-  display_item_count_on_page() { this.counter.innerHTML = this.count; },
-
-  display_section_count_on_page() { s1.counter.innerHTML = s1.count; },
+  style_all_selected_item_counters_to_empty(){ // No border, and text invisible.
+    s1.counter.style.color = "rgb(233,233,237)";
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "none";
+  },
+  
+  style_all_selected_item_counters_to_selected(){ // text invisible & no border
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        item.counter.style.backgroundColor = "rgb(233,233,237)";
+        // item.counter.style.color = "rgb(0,0,0)";
+        item.counter.style.border = "none";
+      }
+    } );
+  },
 
   style_all_selected_item_counters_to_limit_reached(){ // background pink & border red
     s1_items.forEach(item => {
@@ -144,15 +156,10 @@ const section_methods_collection = {
     } );
   },
 
-  style_all_selected_item_counters_to_selected(){ // text invisible & no border
-    s1_items.forEach(item => {
-      if (item.selected) { 
-        item.counter.style.backgroundColor = "rgb(233,233,237)";
-        // item.counter.style.color = "rgb(0,0,0)";
-        item.counter.style.border = "none";
-      }
-    } );
-  },
+
+  display_item_count_on_page() { this.counter.innerHTML = this.count; },
+
+  display_section_count_on_page() { s1.counter.innerHTML = s1.count; },
 
   disable_unselected_item_buttons() {
     s1_items.forEach(item => {
@@ -176,12 +183,6 @@ const section_methods_collection = {
     this.counter.style.color = "rgb(233,233,237)";
     this.counter.style.backgroundColor = "rgb(233,233,237)";
     this.counter.style.border = "none";
-  },
-
-  section_counter_style_empty_or_unselected(){ // No border, and text invisible.
-    s1.counter.style.color = "rgb(233,233,237)";
-    s1.counter.style.backgroundColor = "rgb(233,233,237)";
-    s1.counter.style.border = "none";
   },
 
   activate_all_item_buttons_in_section() {
@@ -214,6 +215,7 @@ const section_methods_collection = {
       this.style_section_counter_to_limit_reached();
       this.disable_unselected_item_buttons();
       this.log_section_status();
+      this.style_all_selected_item_counters_to_limit_reached();
     }
   },
 
@@ -240,6 +242,8 @@ const section_methods_collection = {
     this.log_item_status();
     this.enable_unselected_item_buttons();
     this.style_item_counter_to_empty();
+    this.style_all_selected_item_counters_to_selected();
+    this.style_section_counter_to_selected();
     if (s1.count == 0) {
       this.style_section_counter_to_empty();
     } else {this.style_section_counter_to_selected();}
@@ -345,49 +349,74 @@ const section_methods_collection = {
 };
 
 
+const item1 = {
+  name : 'Tilapia',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i1'),
+  counter : document.querySelector('#i1c'),
+};
+
+const item2 = {
+  name : 'Chicken Breast',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i2'),
+  counter : document.querySelector('#i2c'),
+};
+
+
+const item3 = {
+  name : 'Pork Chop',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i3'),
+  counter : document.querySelector('#i3c'),
+
+};
+
+const item4 = {
+  name : 'Tempeh',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i4'),
+  counter : document.querySelector('#i4c'),
+};
+
+const reset_s1 = {
+  name : 'rest section',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+
+};
+
+
 Object.setPrototypeOf(item1, section_methods_collection);
+Object.setPrototypeOf(item2, section_methods_collection);
+Object.setPrototypeOf(item3, section_methods_collection);
+Object.setPrototypeOf(item4, section_methods_collection);
+Object.setPrototypeOf(reset_s1, section_methods_collection);
 
-
-item1.name = 'Tilapia';
-item1.count = 0;
-item1.limit = null;
-item1.selected = false;
-item1.limit_reached = false;
-item1.button = document.querySelector('#i1');
-item1.counter = document.querySelector('#i1c');
-
-
-item2.name = 'Chicken Breast';
-item2.count = 0;
-item2.limit = null;
-item2.selected = false;
-item2.limit_reached = false;
-item2.button = document.querySelector('#i2');
-item2.counter = document.querySelector('#i2c');
-
-
-item3.name = 'Pork Chop';
-item3.count = 0;
-item3.limit = null;
-item3.selected = false;
-item3.limit_reached = false;
-item3.button = document.querySelector('#i3');
-item3.counter = document.querySelector('#i3c');
-
-item4.name = 'Tempeh';
-item4.count = 0;
-item4.limit = null;
-item4.selected = false;
-item4.limit_reached = false;
-item4.button = document.querySelector('#i4');
-item4.counter = document.querySelector('#i4c');
-
-/////////////////////////////////////////////////////////////////////////
 item1.button.innerHTML = item1.name;
 item2.button.innerHTML = item2.name;
 item3.button.innerHTML = item3.name;
 item4.button.innerHTML = item4.name;
+reset_s1.button.innerHTML = reset_s1.name;
 
+item1.init();
+item2.init();
 item4.init();
 item3.init();
 reset_s1.init();
@@ -399,6 +428,7 @@ const s1_items = [item1, item2, item3, item4];
 item3.init = function() {                           // call to activate >> item3.init();
     this.button.addEventListener('click', () => this.select());
 };
+
 const reset_s1 = {
   name : 'rest section',
   count : 0,
@@ -408,9 +438,12 @@ const reset_s1 = {
   button : document.querySelector('#i5'),
   counter : document.querySelector('#i5c'),
 
+};
+
+// init as a property:
+
   init() { // call to activate >> reset_section.init();
     this.button.addEventListener('click', () => this.reset_section()); },
-};
 
 ADDING PROPERTIES 
 Using Dot Notation After Creation (Post-Initialization)
