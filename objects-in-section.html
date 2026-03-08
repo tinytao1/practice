@@ -69,6 +69,65 @@ const s1 = {
   counter : document.querySelector('#s1c'),
 };
 
+const item1 = {
+  name : 'Tilapia',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i1'),
+  counter : document.querySelector('#i1c'),
+};
+
+const item2 = {
+  name : 'Chicken Breast',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i2'),
+  counter : document.querySelector('#i2c'),
+};
+
+const item3 = {
+  name : 'Pork Chop',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i3'),
+  counter : document.querySelector('#i3c'),
+
+};
+
+const item4 = {
+  name : 'Tempeh',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i4'),
+  counter : document.querySelector('#i4c'),
+};
+
+const reset_s1 = {
+  name : 'Rest section',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
 const section_methods_collection = {
 
   init() { // call to activate >> item4.init();
@@ -349,59 +408,6 @@ const section_methods_collection = {
 };
 
 
-const item1 = {
-  name : 'Tilapia',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i1'),
-  counter : document.querySelector('#i1c'),
-};
-
-const item2 = {
-  name : 'Chicken Breast',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i2'),
-  counter : document.querySelector('#i2c'),
-};
-
-
-const item3 = {
-  name : 'Pork Chop',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i3'),
-  counter : document.querySelector('#i3c'),
-
-};
-
-const item4 = {
-  name : 'Tempeh',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i4'),
-  counter : document.querySelector('#i4c'),
-};
-
-const reset_s1 = {
-  name : 'rest section',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i5'),
-  counter : document.querySelector('#i5c'),
-
-};
-
 
 Object.setPrototypeOf(item1, section_methods_collection);
 Object.setPrototypeOf(item2, section_methods_collection);
@@ -428,6 +434,12 @@ const s1_items = [item1, item2, item3, item4];
 item3.init = function() {                           // call to activate >> item3.init();
     this.button.addEventListener('click', () => this.select());
 };
+
+// init as a property:
+
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+
 
 const reset_s1 = {
   name : 'rest section',
