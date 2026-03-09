@@ -159,7 +159,8 @@ const section_methods_collection = {
   },
 //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
 ///////////////////////////////////////////////////////////////
-////////////  ITEM COUNTER  //////////////////////
+////////////  ITEM COUNTER  //////////////////////  "#ffe6e6"; pink light
+// light grey background + text :  rgb(233,233,237)    // "#beecc7"; light green and darker green #2b943e";  
 
   style_item_counter_to_empty(){ // text invisible & no border
     this.counter.style.color = "rgb(233,233,237)";
@@ -169,12 +170,12 @@ const section_methods_collection = {
 
   style_item_counter_to_selected() {   // text-visible & background green #beecc7 
     this.counter.style.color = "rgb(0,0,0)";
-    this.counter.style.backgroundColor = "#beecc7"; //green
-    this.counter.style.border = "1px solid #2b943e";
+    this.counter.style.border = "1px solid black";
+    // this.counter.style.backgroundColor = "#beecc7"; //green
    }, 
 
   style_item_counter_to_limit_reached(){ // background pink & border red
-      this.counter.style.backgroundColor = "#beecc7";
+      //this.counter.style.backgroundColor = "#beecc7";
       this.counter.style.color = "rgb(0,0,0)"; 
       //this.counter.style.border = "1px solid red";
   },
@@ -182,7 +183,7 @@ const section_methods_collection = {
   //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
 ///////////////////////////////////////////////////////////////
 ////////////   SECTION COUNTER  ////////////////
-
+/*
   style_section_counter_to_empty() { // text invisible & no border
     s1.counter.style.backgroundColor = "rgb(233,233,237)";
     s1.counter.style.color = "rgb(233,233,237)"; 
@@ -200,7 +201,7 @@ const section_methods_collection = {
     s1.counter.style.color = "rgb(0,0,0)"; 
     s1.counter.style.border = "1px solid red";
    },
-  
+  */
      //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
 ///////////////////////////////////////////////////////////////
 ////////////   SECTION COUNTER  /////////////////
@@ -214,8 +215,8 @@ const section_methods_collection = {
   style_all_selected_item_counters_to_selected(){ // text invisible & no border
     s1_items.forEach(item => {
       if (item.selected) { 
-        item.counter.style.backgroundColor = "#beecc7";
-        item.counter.style.border = "1px solid #2b943e";
+        item.counter.style.border = "1px solid black";
+        //item.counter.style.backgroundColor = "#beecc7";
       }
     } );
   },
@@ -223,7 +224,7 @@ const section_methods_collection = {
   style_all_selected_item_counters_to_limit_reached(){ // background pink & border red
     s1_items.forEach(item => {
       if (item.selected) { 
-        item.counter.style.backgroundColor = "#beecc7";
+        //item.counter.style.backgroundColor = "#beecc7";
         //item.counter.style.border = "1px solid red";
       }
     } );
@@ -232,7 +233,7 @@ const section_methods_collection = {
 
   display_item_count_on_page() { this.counter.innerHTML = this.count; },
 
-  display_section_count_on_page() { s1.counter.innerHTML = s1.count; },
+  //display_section_count_on_page() { s1.counter.innerHTML = s1.count; },
 
   disable_unselected_item_buttons() {
     s1_items.forEach(item => {
@@ -272,14 +273,14 @@ const section_methods_collection = {
     this.log_item_status();
     this.log_section_count();
     this.style_item_counter_to_selected();
-    this.style_section_counter_to_selected();
+    //this.style_section_counter_to_selected();
     this.display_item_count_on_page();
-    this.display_section_count_on_page();
+    //this.display_section_count_on_page();
 
     if (s1.count == s1.limit) {
       this.set_section_limit_reached_to_true();
       this.style_item_counter_to_limit_reached();
-      this.style_section_counter_to_limit_reached();
+      //this.style_section_counter_to_limit_reached();
       this.disable_unselected_item_buttons();
       this.log_section_status();
       this.style_all_selected_item_counters_to_limit_reached();
@@ -294,7 +295,7 @@ const section_methods_collection = {
   },
   
   display_all_section_counts(){
-    s1.counter.innerHTML = s1.count;
+    //s1.counter.innerHTML = s1.count;
     s1_items.forEach(item => {
       item.counter.innerHTML = item.count;
     });
@@ -310,11 +311,11 @@ const section_methods_collection = {
     this.enable_unselected_item_buttons();
     this.style_item_counter_to_empty();
     this.style_all_selected_item_counters_to_selected();
-    this.style_section_counter_to_selected();
-    if (s1.count == 0) {
+    //this.style_section_counter_to_selected();
+    /*if (s1.count == 0) {
       this.style_section_counter_to_empty();
     } else {this.style_section_counter_to_selected();}
-    
+    */
   },
 
   select_item_from_section_while_limit_reached(){
