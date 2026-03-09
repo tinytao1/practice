@@ -40,31 +40,67 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
 </div>
 
 <div class="item-div">
-  <button id="i1" class="item-btn inactive-btn ">Item 1</button>
+  <button id="i1" class="item-btn inactive-btn ">item1</button>
   <span id="i1c" class="counter inactive-counter">0</span>
 </div>
 
 <div class="item-div">
-  <button id="i2" class="item-btn inactive-btn">Item 2</button>
+  <button id="i2" class="item-btn inactive-btn">item2</button>
   <span id="i2c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i3" class="item-btn">Item 3</button>
+  <button id="i3" class="item-btn">item3</button>
   <span id="i3c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i4" class="item-btn inactive-btn">Item 4</button>
+  <button id="i4" class="item-btn inactive-btn">item4</button>
   <span id="i4c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i5" class="item-btn inactive-btn">Item 5</button>
+  <button id="i5" class="item-btn inactive-btn">item5</button>
   <span id="i5c" class="counter inactive-counter" >0</span>
 </div>
 
-</div> <!--section 1 end-->
+<div class="item-div">
+  <button id="i6" class="item-btn inactive-btn">item6</button>
+  <span id="i6c" class="counter inactive-counter" >0</span>
+</div>
+
+<div class="item-div">
+  <button id="i7" class="item-btn inactive-btn">item7</button>
+  <span id="i7c" class="counter inactive-counter" >0</span>
+</div>
+
+<div class="item-div">
+  <button id="i8" class="item-btn inactive-btn">item8</button>
+  <span id="i8c" class="counter inactive-counter" >0</span>
+</div>
+
+</div>
+      <!--section 1 end-->
+      <!-- section 2 (Eggs) begin -->
+<div class="section" id="s1"> 
+
+<div class="section-header">
+
+<h2 class="section-title" id="s2t" > section title </h2>
+  
+<span>(choose 
+  <span class="choose-amount" id="s2-choose-amount" >
+    0 </span> 
+)</span>
+
+</div>
+
+<div class="item-div">
+  <button id="i1" class="item-btn inactive-btn ">item1</button>
+  <span id="i1c" class="counter inactive-counter">0</span>
+</div>
+
+</div>  <!-- section Eggs end -->
 
 <script>
 'use strict'
@@ -120,7 +156,80 @@ const item4 = {
   counter : document.querySelector('#i4c'),
 };
 
-/*
+const item5 = {
+  name : 'Tuna',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+};
+
+const item6 = {
+  name : 'Protein Trail Mix',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i6'),
+  counter : document.querySelector('#i6c'),
+};
+
+const item7 = {
+  name : 'Firm Tofu',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i7'),
+  counter : document.querySelector('#i7c'),
+};
+
+const item8 = {
+  name : 'Tempeh Cauliflower Patty',
+  nameBR : 'Tempeh Cauli-<br>flower Patty',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i8'),
+  counter : document.querySelector('#i8c'),
+};
+
+
+const s2 = {
+  name : 'Eggs',
+  count : 0,
+  limit : 1,
+  limit_reached : false,
+  title : document.querySelector('#s2t'),
+  choose : document.querySelector('#s2-choose-amount'),
+};
+
+const item1 = {
+  name : '6 raw eggs',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i1-2'),
+  counter : document.querySelector('#i1c'),
+};
+
+
+/*  EMPTY ITEM DEFINITION
+
+const item = {
+  name : '',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i'),
+  counter : document.querySelector('#ic'),
+};
+
 const reset_s1 = {
   name : 'Rest section',
   count : 0,
@@ -133,11 +242,11 @@ const reset_s1 = {
   init() { // call to activate >> reset_section.init();
     this.button.addEventListener('click', () => this.reset_section()); },
 
-}; */
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
+}; */
 
 const section_methods_collection = {
 
@@ -159,7 +268,7 @@ const section_methods_collection = {
   },
 //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
 ///////////////////////////////////////////////////////////////
-////////////  ITEM COUNTER  //////////////////////  "#ffe6e6"; pink light
+////////////  ITEM COUNTER  //////////////////////  "#ffe6e6"; pink light  palergreen #bffabb palest green #e9fce8
 // light grey background + text :  rgb(233,233,237)    // "#beecc7"; light green and darker green #2b943e";  
 
   style_item_counter_to_empty(){ // text invisible & no border
@@ -170,20 +279,44 @@ const section_methods_collection = {
 
   style_item_counter_to_selected() {   // text-visible & background green #beecc7 
     this.counter.style.color = "rgb(0,0,0)";
-    this.counter.style.border = "1px solid black";
-    // this.counter.style.backgroundColor = "#beecc7"; //green
+    //this.counter.style.border = "1px solid #bffabb"; 
+    //this.counter.style.backgroundColor = "#e9fce8"; //green
    }, 
 
   style_item_counter_to_limit_reached(){ // background pink & border red
       //this.counter.style.backgroundColor = "#beecc7";
-      this.counter.style.color = "rgb(0,0,0)"; 
+      //this.counter.style.color = "rgb(0,0,0)"; 
       //this.counter.style.border = "1px solid red";
   },
 
-  //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
+  style_all_selected_item_counters_to_empty(){ // No border, and text invisible.
+    s1.counter.style.color = "rgb(233,233,237)";
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "none";
+  },
+  
+  style_all_selected_item_counters_to_selected(){ // text invisible & no border
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        //item.counter.style.border = "1px solid #bffabb";
+        //item.counter.style.backgroundColor = "#e9fce8";
+      }
+    } );
+  },
+
+  style_all_selected_item_counters_to_limit_reached(){ // background pink & border red
+    s1_items.forEach(item => {
+      if (item.selected) { 
+        //item.counter.style.backgroundColor = "#beecc7";
+        //item.counter.style.border = "1px solid red";
+      }
+    } );
+  },
+
+ /* //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
 ///////////////////////////////////////////////////////////////
 ////////////   SECTION COUNTER  ////////////////
-/*
+
   style_section_counter_to_empty() { // text invisible & no border
     s1.counter.style.backgroundColor = "rgb(233,233,237)";
     s1.counter.style.color = "rgb(233,233,237)"; 
@@ -201,34 +334,10 @@ const section_methods_collection = {
     s1.counter.style.color = "rgb(0,0,0)"; 
     s1.counter.style.border = "1px solid red";
    },
-  */
+  
      //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
 ///////////////////////////////////////////////////////////////
-////////////   SECTION COUNTER  /////////////////
-
-  style_all_selected_item_counters_to_empty(){ // No border, and text invisible.
-    s1.counter.style.color = "rgb(233,233,237)";
-    s1.counter.style.backgroundColor = "rgb(233,233,237)";
-    s1.counter.style.border = "none";
-  },
-  
-  style_all_selected_item_counters_to_selected(){ // text invisible & no border
-    s1_items.forEach(item => {
-      if (item.selected) { 
-        item.counter.style.border = "1px solid black";
-        //item.counter.style.backgroundColor = "#beecc7";
-      }
-    } );
-  },
-
-  style_all_selected_item_counters_to_limit_reached(){ // background pink & border red
-    s1_items.forEach(item => {
-      if (item.selected) { 
-        //item.counter.style.backgroundColor = "#beecc7";
-        //item.counter.style.border = "1px solid red";
-      }
-    } );
-  },
+////////////   SECTION COUNTER  ///////////////// */
 
 
   display_item_count_on_page() { this.counter.innerHTML = this.count; },
@@ -279,11 +388,11 @@ const section_methods_collection = {
 
     if (s1.count == s1.limit) {
       this.set_section_limit_reached_to_true();
-      this.style_item_counter_to_limit_reached();
+      //this.style_item_counter_to_limit_reached();
       //this.style_section_counter_to_limit_reached();
       this.disable_unselected_item_buttons();
       this.log_section_status();
-      this.style_all_selected_item_counters_to_limit_reached();
+      //this.style_all_selected_item_counters_to_limit_reached();
     }
   },
 
@@ -310,7 +419,7 @@ const section_methods_collection = {
     this.log_item_status();
     this.enable_unselected_item_buttons();
     this.style_item_counter_to_empty();
-    this.style_all_selected_item_counters_to_selected();
+    //this.style_all_selected_item_counters_to_selected();
     //this.style_section_counter_to_selected();
     /*if (s1.count == 0) {
       this.style_section_counter_to_empty();
@@ -416,12 +525,15 @@ const section_methods_collection = {
 
 };
 
-
-
 Object.setPrototypeOf(item1, section_methods_collection);
 Object.setPrototypeOf(item2, section_methods_collection);
 Object.setPrototypeOf(item3, section_methods_collection);
 Object.setPrototypeOf(item4, section_methods_collection);
+Object.setPrototypeOf(item5, section_methods_collection);
+Object.setPrototypeOf(item6, section_methods_collection);
+Object.setPrototypeOf(item7, section_methods_collection);
+Object.setPrototypeOf(item8, section_methods_collection);
+
 // Object.setPrototypeOf(reset_s1, section_methods_collection);
 
 s1.title.innerHTML = s1.name;
@@ -430,15 +542,23 @@ item1.button.innerHTML = item1.name;
 item2.button.innerHTML = item2.name;
 item3.button.innerHTML = item3.name;
 item4.button.innerHTML = item4.name;
+item5.button.innerHTML = item5.name;
+item6.button.innerHTML = item6.name;
+item7.button.innerHTML = item7.name;
+item8.button.innerHTML = item8.name;
 // reset_s1.button.innerHTML = reset_s1.name;
 
 item1.init();
 item2.init();
-item4.init();
 item3.init();
+item4.init();
+item5.init();
+item6.init();
+item7.init();
+item8.init();
 // reset_s1.init();
 
-const s1_items = [item1, item2, item3, item4];
+const s1_items = [ item1, item2, item3, item4, item5, item6, item7, item8, ];
 
 
 /*
