@@ -1,0 +1,150 @@
+//  Please show coding options for giving item2 and item3 access to the method in item1.
+
+const section1 = {
+    name : 'Proteins',
+    count : 0,
+
+    item1 : {
+        name : 'Chicken',
+        count : 0,
+
+        show(){ alert( this.name + " count is " + this.count + ".")},
+    },
+
+    item2 : {
+        name : 'Tilapia',
+        count : 0,
+    },
+
+    item3 : {
+        name : 'Pork Chop',
+        count : 0,
+    },
+};
+
+Prototypal Approach (Recommended for Scaling)
+If you find yourself doing this often, 
+it's cleaner to define the method once in a prototype or a shared object 
+so all items inherit it without duplication.A
+
+const itemActions = {
+    show() { alert(`${this.name} count is ${this.count}.`); }
+};
+
+// Set the prototype of your items to itemActions
+Object.setPrototypeOf(section1.item2, itemActions);
+section1.item2.show();
+
+How can I set the prototype in the item2 definition? 
+
+Using the __proto__ Key (Standardized)
+Although Object.prototype.__proto__ is deprecated as a getter/setter for existing objects,
+ using __proto__ inside an object literal is standardized in ES6/ES2015 and
+  highly optimized by modern engines.
+
+const itemActions = {
+    show() { alert(`${this.name} count is ${this.count}.`); }
+};
+
+const section1 = {
+    name: 'Proteins',
+    count: 0,
+    
+    item1: {
+        name: 'Chicken',
+        count: 0,
+        show() { alert(`${this.name} count is ${this.count}.`); },
+        // OR:  __proto__: itemActions, // Set prototype during definition
+    },
+
+    item2: {
+        __proto__: itemActions, // Set prototype during definition
+        name: 'Tilapia',
+        count: 0,
+    },
+
+    item3: {
+        __proto__: itemActions, // Set prototype during definition
+        name: 'Pork Chop',
+        count: 0,
+    },
+};
+
+section1.item2.show(); // Alerts: "Tilapia count is 0."
+
+////////////////////////////////////////////////////////////////////////
+
+
+Define the method in a separate, reusable object 
+You can define the shared method outside of section1 and
+ assign it to the properties. This promotes reusability across different sections if needed.
+
+const itemMethods = {
+    show() {
+        alert(this.name + " count is " + this.count + ".");
+    },
+};
+
+const section1 = {
+    name : 'Proteins',
+    count : 0,
+
+    item1 : {
+        name : 'Chicken',
+        count : 0,
+        show: itemMethods.show, // Assign the method here
+    },
+
+    item2 : {
+        name : 'Tilapia',
+        count : 0,
+        show: itemMethods.show, // Assign the method here
+    },
+
+    item3 : {
+        name : 'Pork Chop',
+        count : 0,
+        show: itemMethods.show, // Assign the method here
+    },
+};
+
+// Usage
+section1.item3.show(); // Alerts: Pork Chop count is 0.
+
+/////////////////////////////////////////////////////////////////
+
+Refactor using a Factory Function
+A more object-oriented approach would be to use a factory function or ES6 classes to create the items.
+ This ensures each item instance is created with the necessary properties and methods from the start.
+
+ function createFoodItem(name, count) {
+    return {
+        name,
+        count,
+        show() {
+            alert(this.name + " count is " + this.count + ".");
+        },
+    };
+}
+
+const section1 = {
+    name : 'Proteins',
+    count : 0,
+    item1 : createFoodItem('Chicken', 0),
+    item2 : createFoodItem('Tilapia', 0),
+    item3 : createFoodItem('Pork Chop', 0),
+};
+
+// Usage
+section1.item1.show(); // Alerts: Chicken count is 0.
+section1.item3.show(); // Alerts: Pork Chop count is 0.
+
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
