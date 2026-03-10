@@ -117,151 +117,7 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
 <script>                //      /* <!-- START SCRIPT  -->  */
 'use strict'
 
-const s1 = {
-  name : 'Proteins',
-  count : 0,
-  limit : 2,
-  limit_reached : false,
-  title : document.querySelector('#s1t'),
-  choose : document.querySelector('#s1-choose-amount'),
-  // counter : document.querySelector('#s1c'),
-
-  item1 : {
-    name : 'Tilapia',
-    count : 0,
-    limit : null,
-    selected : false,
-    limit_reached : false,
-    button : document.querySelector('#i1'),
-    counter : document.querySelector('#i1c'),
-  },
-
-  item2 : {
-    name : 'Chicken Breast',
-    count : 0,
-    limit : null,
-    selected : false,
-    limit_reached : false,
-    button : document.querySelector('#i2'),
-    counter : document.querySelector('#i2c'),
-},
-
- item3 : {
-  name : 'Pork Chop',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i3'),
-  counter : document.querySelector('#i3c'),
-
-},
-
- item4 : {
-  name : 'Tempeh',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i4'),
-  counter : document.querySelector('#i4c'),
-},
-
- item5 : {
-  name : 'Tuna',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i5'),
-  counter : document.querySelector('#i5c'),
-},
-
- item6 : {
-  name : 'Protein Trail Mix',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i6'),
-  counter : document.querySelector('#i6c'),
-},
-
- item7 : {
-  name : 'Firm Tofu',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i7'),
-  counter : document.querySelector('#i7c'),
-},
-
- item8 : {
-  name : 'Tempeh Cauliflower Patty',
-  nameBR : 'Tempeh Cauli-<br>flower Patty',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i8'),
-  counter : document.querySelector('#i8c'),
-},
-};
-
-
-const s2 = {
-  name : 'Eggs',
-  count : 0,
-  limit : 1,
-  limit_reached : false,
-  title : document.querySelector('#s2t'),
-  choose : document.querySelector('#s2-choose-amount'),
-
- item1 : {
-  name : '6 raw eggs',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i1-2'),
-  counter : document.querySelector('#i1c'),
-},
-
-};
-
-
-/*  EMPTY ITEM DEFINITION
-
-const item = {
-  name : '',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i'),
-  counter : document.querySelector('#ic'),
-};
-
-const reset_s1 = {
-  name : 'Rest section',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i5'),
-  counter : document.querySelector('#i5c'),
-
-  init() { // call to activate >> reset_section.init();
-    this.button.addEventListener('click', () => this.reset_section()); },
-
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-
-}; */
-
-const section_methods_collection = {
+const itemMethods = {   // formerly: "section_methods_collection" = {
 
   init() { // call to activate >> item#.init();
     this.button.addEventListener('click', () => this.select()); },
@@ -538,6 +394,160 @@ const section_methods_collection = {
 
 };
 
+const s1 = {
+  name : 'Proteins',
+  count : 0,
+  limit : 2,
+  limit_reached : false,
+  title : document.querySelector('#s1-title'),
+  choose : document.querySelector('#s1-choose-amount'),
+  // counter : document.querySelector('#s1c'),
+
+  item1 : {
+    __proto__: itemMethods,
+    name : 'Tilapia',
+    count : 0,
+    limit : null,
+    selected : false,
+    limit_reached : false,
+    button : document.querySelector('#s1-1'),
+    counter : document.querySelector('#s1-1c'),
+  },
+
+  item2 : {
+    __proto__: itemMethods,
+    name : 'Chicken Breast',
+    count : 0,
+    limit : null,
+    selected : false,
+    limit_reached : false,
+    button : document.querySelector('#s1-2'),
+    counter : document.querySelector('#s1-2c'),
+},
+
+ item3 : {
+  __proto__: itemMethods,
+  name : 'Pork Chop',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s1-3'),
+  counter : document.querySelector('#s1-3c'),
+
+},
+
+ item4 : {
+  __proto__: itemMethods,
+  name : 'Tempeh',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s1-4'),
+  counter : document.querySelector('#s1-4c'),
+},
+
+ item5 : {
+  __proto__: itemMethods,
+  name : 'Tuna',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s1-5'),
+  counter : document.querySelector('#s1-5c'),
+},
+
+ item6 : {
+  __proto__: itemMethods,
+  name : 'Protein Trail Mix',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s1-6'),
+  counter : document.querySelector('#s1-6c'),
+},
+
+ item7 : {
+  __proto__: itemMethods,
+  name : 'Firm Tofu',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s1-7'),
+  counter : document.querySelector('#s1-7c'),
+},
+
+ item8 : {
+  __proto__: itemMethods,
+  name : 'Tempeh Cauliflower Patty',
+  nameBR : 'Tempeh Cauli-<br>flower Patty',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s1-8'),
+  counter : document.querySelector('#s1-8c'),
+},
+};
+
+
+const s2 = {
+  name : 'Eggs',
+  count : 0,
+  limit : 1,
+  limit_reached : false,
+  title : document.querySelector('#s2-title'),
+  choose : document.querySelector('#s2-choose-amount'),
+
+ item1 : {
+  __proto__: itemMethods,
+  name : '6 raw eggs',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s2-1'),
+  counter : document.querySelector('#s2-1c'),
+},
+
+};
+
+
+/*  EMPTY ITEM DEFINITION
+
+const item = {
+  __proto__: itemMethods,
+  name : '',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i'),
+  counter : document.querySelector('#ic'),
+};
+
+const reset_s1 = {
+  name : 'Rest section',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+}; 
+
 Object.setPrototypeOf(item1, section_methods_collection);
 Object.setPrototypeOf(item2, section_methods_collection);
 Object.setPrototypeOf(item3, section_methods_collection);
@@ -546,19 +556,19 @@ Object.setPrototypeOf(item5, section_methods_collection);
 Object.setPrototypeOf(item6, section_methods_collection);
 Object.setPrototypeOf(item7, section_methods_collection);
 Object.setPrototypeOf(item8, section_methods_collection);
-
+*/
 // Object.setPrototypeOf(reset_s1, section_methods_collection);
 
 s1.title.innerHTML = s1.name;
 s1.choose.innerHTML = s1.limit;
-item1.button.innerHTML = item1.name;
-item2.button.innerHTML = item2.name;
-item3.button.innerHTML = item3.name;
-item4.button.innerHTML = item4.name;
-item5.button.innerHTML = item5.name;
-item6.button.innerHTML = item6.name;
-item7.button.innerHTML = item7.name;
-item8.button.innerHTML = item8.name;
+s1.item1.button.innerHTML = s1.item1.name;
+s1.item2.button.innerHTML = s1.item2.name;
+s1.item3.button.innerHTML = s1.item3.name;
+s1.item4.button.innerHTML = s1.item4.name;
+s1.item5.button.innerHTML = s1.item5.name;
+s1.item6.button.innerHTML = s1.item6.name;
+s1.item7.button.innerHTML = s1.item7.name;
+s1.item8.button.innerHTML = s1.item8.name;
 // reset_s1.button.innerHTML = reset_s1.name;
 
 item1.init();
