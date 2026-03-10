@@ -11,11 +11,15 @@
             border:1px solid rgb(143,143,157); border-radius: 9999px;
             background-color: rgb(233,233,237); */
             } 
-.counter {  padding: 1px 4px; 
-            background-color: rgb(233,233,237); 
-            color: rgb(233,233,237); 
-            border-radius: 9999px; 
-            font-family: Arial, Helvetica, sans-serif; } 
+.counter {/* padding: 1px 4px;  */
+          /* background-color: rgb(233,233,237);  */
+           color: rgb(233,233,237);  
+          /* border-radius: 9999px;  */
+          font-family: Arial, Helvetica, sans-serif;
+          border-bottom: 1px solid gray;  } 
+
+/* #s1-1c { min-width: 8px;
+        background-color: white; } */
 /* .item-btn:hover { border:1px solid rgb(0,0,0); } */
 /* .item-btn:active {background-color: #d5d5dd;} */
 h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
@@ -25,11 +29,11 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
 </head>
 <body>
 
-<div class="section" id="s1">
+<div class="section" id="s1-section-div">  <!-- START SECTION 1 -->
 
-<div class="section-header">
+<div class="section-header" id="s1-header"> <!-- START SECTION 1 HEADER -->
 
-<h2 class="section-title" id="s1t" > section title </h2>
+<h2 class="section-title" id="s1-title" > section title </h2>
 <!-- <span class="section-counter" id="s1c"> 0 </span> -->
   
 <span>(choose 
@@ -37,72 +41,80 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
     0 </span> 
 )</span>
 
+</div>                                 <!-- END SECTION 1 HEADER -->
+
+<div class="item-div">
+  <button id="s1-1" class="item-btn inactive-btn ">item1</button>
+  <span id="s1-1c" class="counter inactive-counter">0</span>
 </div>
 
 <div class="item-div">
-  <button id="i1" class="item-btn inactive-btn ">item1</button>
-  <span id="i1c" class="counter inactive-counter">0</span>
+  <button id="s1-2" class="item-btn inactive-btn">item2</button>
+  <span id="s1-2c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i2" class="item-btn inactive-btn">item2</button>
-  <span id="i2c" class="counter inactive-counter" >0</span>
+  <button id="s1-3" class="item-btn">item3</button>
+  <span id="s1-3c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i3" class="item-btn">item3</button>
-  <span id="i3c" class="counter inactive-counter" >0</span>
+  <button id="s1-4" class="item-btn inactive-btn">item4</button>
+  <span id="s1-4c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i4" class="item-btn inactive-btn">item4</button>
-  <span id="i4c" class="counter inactive-counter" >0</span>
+  <button id="s1-5" class="item-btn inactive-btn">item5</button>
+  <span id="s1-5c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i5" class="item-btn inactive-btn">item5</button>
-  <span id="i5c" class="counter inactive-counter" >0</span>
+  <button id="s1-6" class="item-btn inactive-btn">item6</button>
+  <span id="s1-6c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i6" class="item-btn inactive-btn">item6</button>
-  <span id="i6c" class="counter inactive-counter" >0</span>
+  <button id="s1-7" class="item-btn inactive-btn">item7</button>
+  <span id="s1-7c" class="counter inactive-counter" >0</span>
 </div>
 
 <div class="item-div">
-  <button id="i7" class="item-btn inactive-btn">item7</button>
-  <span id="i7c" class="counter inactive-counter" >0</span>
+  <button id="s1-8" class="item-btn inactive-btn">item8</button>
+  <span id="s1-8c" class="counter inactive-counter" >0</span>
 </div>
 
-<div class="item-div">
-  <button id="i8" class="item-btn inactive-btn">item8</button>
-  <span id="i8c" class="counter inactive-counter" >0</span>
-</div>
+</div> <!-- END SECTION 1  -->
+      
 
-</div>
-      <!--section 1 end-->
-      <!-- section 2 (Eggs) begin -->
-<div class="section" id="s1"> 
 
-<div class="section-header">
 
-<h2 class="section-title" id="s2t" > section title </h2>
+
+
+
+
+<div class="section" id="s2-section-div">  <!-- START SECTION 2 -->
+
+<div class="section-header" id="s2-header"> <!-- START SECTION 2 HEADER -->
+
+<h2 class="section-title" id="s2-title" > section title </h2>
+<!-- <span class="section-counter" id="s1c"> 0 </span> -->
   
 <span>(choose 
   <span class="choose-amount" id="s2-choose-amount" >
     0 </span> 
 )</span>
 
-</div>
+</div>                                  <!-- END SECTION 2 HEADER -->
 
 <div class="item-div">
-  <button id="i1" class="item-btn inactive-btn ">item1</button>
-  <span id="i1c" class="counter inactive-counter">0</span>
+  <button id="s2-1" class="item-btn inactive-btn ">item1</button>
+  <span id="s2-1c" class="counter inactive-counter">0</span>
 </div>
 
-</div>  <!-- section Eggs end -->
+</div>                                 <!-- END SECTION 2 -->
 
-<script>
+
+<script>                //      /* <!-- START SCRIPT  -->  */
 'use strict'
 
 const s1 = {
@@ -113,29 +125,28 @@ const s1 = {
   title : document.querySelector('#s1t'),
   choose : document.querySelector('#s1-choose-amount'),
   // counter : document.querySelector('#s1c'),
-};
 
-const item1 = {
-  name : 'Tilapia',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i1'),
-  counter : document.querySelector('#i1c'),
-};
+  item1 : {
+    name : 'Tilapia',
+    count : 0,
+    limit : null,
+    selected : false,
+    limit_reached : false,
+    button : document.querySelector('#i1'),
+    counter : document.querySelector('#i1c'),
+  },
 
-const item2 = {
-  name : 'Chicken Breast',
-  count : 0,
-  limit : null,
-  selected : false,
-  limit_reached : false,
-  button : document.querySelector('#i2'),
-  counter : document.querySelector('#i2c'),
-};
+  item2 : {
+    name : 'Chicken Breast',
+    count : 0,
+    limit : null,
+    selected : false,
+    limit_reached : false,
+    button : document.querySelector('#i2'),
+    counter : document.querySelector('#i2c'),
+},
 
-const item3 = {
+ item3 : {
   name : 'Pork Chop',
   count : 0,
   limit : null,
@@ -144,9 +155,9 @@ const item3 = {
   button : document.querySelector('#i3'),
   counter : document.querySelector('#i3c'),
 
-};
+},
 
-const item4 = {
+ item4 : {
   name : 'Tempeh',
   count : 0,
   limit : null,
@@ -154,9 +165,9 @@ const item4 = {
   limit_reached : false,
   button : document.querySelector('#i4'),
   counter : document.querySelector('#i4c'),
-};
+},
 
-const item5 = {
+ item5 : {
   name : 'Tuna',
   count : 0,
   limit : null,
@@ -164,9 +175,9 @@ const item5 = {
   limit_reached : false,
   button : document.querySelector('#i5'),
   counter : document.querySelector('#i5c'),
-};
+},
 
-const item6 = {
+ item6 : {
   name : 'Protein Trail Mix',
   count : 0,
   limit : null,
@@ -174,9 +185,9 @@ const item6 = {
   limit_reached : false,
   button : document.querySelector('#i6'),
   counter : document.querySelector('#i6c'),
-};
+},
 
-const item7 = {
+ item7 : {
   name : 'Firm Tofu',
   count : 0,
   limit : null,
@@ -184,9 +195,9 @@ const item7 = {
   limit_reached : false,
   button : document.querySelector('#i7'),
   counter : document.querySelector('#i7c'),
-};
+},
 
-const item8 = {
+ item8 : {
   name : 'Tempeh Cauliflower Patty',
   nameBR : 'Tempeh Cauli-<br>flower Patty',
   count : 0,
@@ -195,6 +206,7 @@ const item8 = {
   limit_reached : false,
   button : document.querySelector('#i8'),
   counter : document.querySelector('#i8c'),
+},
 };
 
 
@@ -205,9 +217,8 @@ const s2 = {
   limit_reached : false,
   title : document.querySelector('#s2t'),
   choose : document.querySelector('#s2-choose-amount'),
-};
 
-const item1 = {
+ item1 : {
   name : '6 raw eggs',
   count : 0,
   limit : null,
@@ -215,6 +226,8 @@ const item1 = {
   limit_reached : false,
   button : document.querySelector('#i1-2'),
   counter : document.querySelector('#i1c'),
+},
+
 };
 
 
