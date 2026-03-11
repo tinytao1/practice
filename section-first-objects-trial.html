@@ -114,72 +114,60 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
 </div>                                 <!-- END HTML SECTION 2 -->
 
 
+
+
+
+
+
+
+<div class="section" id="s-section-div">  <!-- START HTML SECTION  -->
+
+<div class="section-header" id="s-header"> <!-- START SECTION  HEADER -->
+
+<h2 class="section-title" id="s-title" > section title </h2>
+<!-- <span class="section-counter" id="s1c"> 0 </span> -->
+  
+<span>(choose 
+  <span class="choose-amount" id="s-choose-amount" >
+    0 </span> 
+)</span>
+
+</div>                                  <!-- END SECTION  HEADER -->
+
+<div class="item-div">
+  <button id="s-1" class="item-btn inactive-btn ">item1</button>
+  <span id="s-1c" class="counter inactive-counter">0</span>
+</div>
+
+</div>                                 <!-- END HTML SECTION  -->
+
+<!--
+
+<div class="section" id="s-section-div">  <!-- START HTML SECTION  -->
+
+<div class="section-header" id="s-header"> <!-- START SECTION  HEADER -->
+
+<h2 class="section-title" id="s-title" > section title </h2>
+<!-- <span class="section-counter" id="s1c"> 0 </span> -->
+  
+<span>(choose 
+  <span class="choose-amount" id="s-choose-amount" >
+    0 </span> 
+)</span>
+
+</div>                                  <!-- END SECTION  HEADER -->
+
+<div class="item-div">
+  <button id="s-1" class="item-btn inactive-btn ">item1</button>
+  <span id="s-1c" class="counter inactive-counter">0</span>
+</div>
+
+</div>                                 <!-- END HTML SECTION  -->
+
+-->
 <script>                //      /* <!-- START SCRIPT  -->  */
 'use strict'
 /*
-To ensure that calling
-s1.item1.add_1() updates the s1 section counter, the add_1 method
- must reference the parent section object directly rather than a string ('s1').
-
- Here is the refactored code:
- const itemMethods = {
-  init() {
-    // Bind 'this' so 'this.add_1' correctly refers to the item object
-    this.button.addEventListener('click', () => this.add_1());
-  },
-
-  add_1() {
-    this.count++;
-    // Access the parent section object directly
-    this.section.count++;
-    console.log(`${this.name} count: ${this.count}`);
-    console.log(`${this.section.name} total: ${this.section.count}`);
-  },
-};
-
-const s1 = {
-  name: 'Proteins',
-  count: 0,
-  limit: 2,
-  // ... rest of properties
-  item1: {
-    __proto__: itemMethods,
-    // Reference the parent object (s1) directly instead of a string 's1'
-    get section() { return s1; },
-    name: 'Tilapia',
-    count: 0,
-    button: document.querySelector('#s1-1'), // Ensure these exist in DOM
-  },
-};
-
-const s2 = {
-  name: 'Eggs',
-  count: 0,
-  limit: 1,
-  // ... rest of properties
-  item1: {
-    __proto__: itemMethods,
-    // Reference the parent object (s2) directly
-    get section() { return s2; },
-    name: '6 raw eggs',
-    count: 0,
-    button: document.querySelector('#s2-1'), // Ensure these exist in DOM
-  },
-};
-
-// Initialize
-s1.item1.init();
-s2.item1.init();
-
-// Test:
-// s1.item1.add_1(); // Updates s1.count
-// s2.item1.add_1(); // Updates s2.count
-
-Key Changes
-
-    Getter for section: Instead of section: 's1' (a string), I used get section() { return s1; } (a getter function). This creates a direct reference to the parent object, allowing this.section.count++ to work correctly.
-    this Context: In the addEventListener callback, the arrow function () => this.add_1() preserves the this context, ensuring this refers to the item object (s1.item1), not the button element.
-    Refactoring for Robustness: If s1.item1.button is null, the code will fail. Ensure selectors match your HTM
 */
 const itemMethods = {   
 
@@ -290,7 +278,7 @@ const itemMethods = {
 
   set_item_count_to_zero(){this.count = 0;},
 
-  set_section_count_to_zero() { s1.count = 0; },
+  set_section_count_to_zero() { this.section.count = 0; },
 
   set_item_selected_to_false(){this.selected = false;},
 
@@ -302,11 +290,11 @@ const itemMethods = {
 
   log_item_status(){console.log(this.name + " count is " + this.count + ", selected " + this.selected + ".");},
 
-  log_section_count(){console.log(s1.name + " count is: " + s1.count);},
+  log_section_count(){console.log(this.section.name + " count is: " + this.section.count);},
 
-  set_section_limit_reached_to_true() {s1.limit_reached = true;},
+  set_section_limit_reached_to_true() {this.section.limit_reached = true;},
 
-  set_section_limit_reached_to_false() {s1.limit_reached = false;},
+  set_section_limit_reached_to_false() {this.section.limit_reached = false;},
   
   select_item_from_zero() {
     this.add_1();
@@ -329,10 +317,10 @@ const itemMethods = {
   },
 
   log_section_status(){ 
-    console.log("S1 count is " + s1.count + ", limit reached " + s1.limit_reached );
+    console.log(this.section.name + " count is " + this.section.count + ", limit reached " + this.section.limit_reached );
   },
   remove_item_from_section_count() {
-    s1.count = s1.count - this.count;
+    this.section.count = this.section.count - this.count;
   },
   
   display_all_section_counts(){
@@ -378,7 +366,7 @@ const itemMethods = {
 ////////////// BEGIN RESET METHODS  /////////////////////////////////////
 
   log_section_status(){ 
-    console.log("S1 count is " + s1.count + ", limit reached " + s1.limit_reached );
+    console.log(this.section.name + " count is " + this.section.count + ", limit reached " + this.section.limit_reached );
   },
 
   log_all_items_status() { 
@@ -401,7 +389,7 @@ const itemMethods = {
   },
 
   set_section_count_to_zero(){
-    s1.count = 0;
+    this.section.count = 0;
   },
 
   set_all_item_counts_to_zero(){
@@ -411,7 +399,7 @@ const itemMethods = {
   },
 
   set_section_limit_reached_to_false(){ 
-    s1.limit_reached = false;
+    this.section.limit_reached = false;
   },
 
   set_all_item_selecteds_to_false(){
@@ -421,10 +409,10 @@ const itemMethods = {
   },
 
   style_section_counter_to_empty() { // text invisible & no border
-    s1.counter.style.backgroundColor = "rgb(233,233,237)";
-    s1.counter.style.color = "rgb(233,233,237)"; 
-    s1.counter.style.border = "none";
-    s1.counter.innerHTML = s1.count;
+    this.section.counter.style.backgroundColor = "rgb(233,233,237)";
+    this.section.counter.style.color = "rgb(233,233,237)"; 
+    this.section.counter.style.border = "none";
+    this.section.counter.innerHTML = this.section.count;
    },
 
   style_all_item_counters_to_empty(){
@@ -468,7 +456,7 @@ const s1 = {
 
   item1 : {
     __proto__: itemMethods,
-    section : 's1',
+    get section() { return s1; }, 
     name : 'Tilapia',
     count : 0,
     limit : null,
@@ -480,7 +468,7 @@ const s1 = {
 
   item2 : {
     __proto__: itemMethods,
-    section : 's1',
+    get section() { return s1; },
     name : 'Chicken Breast',
     count : 0,
     limit : null,
@@ -492,7 +480,7 @@ const s1 = {
 
  item3 : {
   __proto__: itemMethods,
-  section : 's1',
+  get section() { return s1; }, 
   name : 'Pork Chop',
   count : 0,
   limit : null,
@@ -505,7 +493,7 @@ const s1 = {
 
  item4 : {
   __proto__: itemMethods,
-  section : 's1',
+  get section() { return s1; }, 
   name : 'Tempeh',
   count : 0,
   limit : null,
@@ -517,7 +505,7 @@ const s1 = {
 
  item5 : {
   __proto__: itemMethods,
-  section : 's1',
+  get section() { return s1; }, 
   name : 'Tuna',
   count : 0,
   limit : null,
@@ -529,7 +517,7 @@ const s1 = {
 
  item6 : {
   __proto__: itemMethods,
-  section : 's1',
+    get section() { return s1; }, 
   name : 'Protein Trail Mix',
   count : 0,
   limit : null,
@@ -541,7 +529,7 @@ const s1 = {
 
  item7 : {
   __proto__: itemMethods,
-  section : 's1',
+    get section() { return s1; }, 
   name : 'Firm Tofu',
   count : 0,
   limit : null,
@@ -553,7 +541,7 @@ const s1 = {
 
  item8 : {
   __proto__: itemMethods,
-  section : 's1',
+    get section() { return s1; }, 
   name : 'Tempeh Cauliflower Patty',
   nameBR : 'Tempeh Cauli-<br>flower Patty',
   count : 0,
@@ -576,7 +564,7 @@ const s2 = {
 
  item1 : {
   __proto__: itemMethods,
-  section : 's2',
+  get section() { return s2; },
   name : '6 raw eggs',
   count : 0,
   limit : null,
@@ -585,8 +573,68 @@ const s2 = {
   button : document.querySelector('#s2-1'),
   counter : document.querySelector('#s2-1c'),
 },
+};      ///   END SECTION 2 CODE 
+  //    START SECTION 3 CODE 
+ const s3 = {
+  name : 'Dairy',
+  count : 0,
+  limit : 2,
+  limit_reached : false,
+  title : document.querySelector('#s3-title'),
+  choose : document.querySelector('#s3-choose-amount'),
+
+ item : {
+  __proto__: itemMethods,
+  get section() { return s3; }, 
+  name : 'Whole Milk',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s3-1'),
+  counter : document.querySelector('#s3-1c'),
+},
+
+ item : {
+  __proto__: itemMethods,
+  get section() { return s3; }, 
+  name : '2% Milk',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s3-2'),
+  counter : document.querySelector('#s3-2c'),
+},
+
+ item3 : {
+  __proto__: itemMethods,
+  get section() { return s3; }, 
+  name : 'Fat Free Milk',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s3-3'),
+  counter : document.querySelector('#s3-3c'),
+},
+/*
+const item = {
+  __proto__: itemMethods,
+  get section() { return s3; }, 
+  name : '',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s3-'),
+  counter : document.querySelector('#s3-c'),
+};
+*/
 
 };
+
+  //    END SECTION 3 CODE 
 
 
 s1.title.innerHTML = s1.name;
@@ -633,8 +681,9 @@ const s = {
   title : document.querySelector('#s-title'),
   choose : document.querySelector('#s-choose-amount'),
 
-const item = {
+  item : {
   __proto__: itemMethods,
+  get section() { return s; }, 
   name : '',
   count : 0,
   limit : null,
@@ -642,9 +691,10 @@ const item = {
   limit_reached : false,
   button : document.querySelector('#s-'),
   counter : document.querySelector('#s-c'),
+},
 };
 
-const reset_s1 = {
+ reset_s1 : {
   name : 'Rest section',
   count : 0,
   limit : null,
@@ -652,7 +702,8 @@ const reset_s1 = {
   limit_reached : false,
   button : document.querySelector('#i5'),
   counter : document.querySelector('#i5c'),
-
+},
+};
   init() { // call to activate >> reset_section.init();
     this.button.addEventListener('click', () => this.reset_section()); },
 
