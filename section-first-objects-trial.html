@@ -13,7 +13,7 @@
             } 
 .counter {/* padding: 1px 4px;  */
           /* background-color: rgb(233,233,237);  */
-           color: rgb(233,233,237);  
+           color: white; /* light gray:  rgb(233,233,237);  */
           /* border-radius: 9999px;  */
           font-family: Arial, Helvetica, sans-serif;
           border-bottom: 1px solid gray;  } 
@@ -83,7 +83,7 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
   <span id="s1-8c" class="counter inactive-counter" >0</span>
 </div>
 
-</div> <!-- END SECTION 1  -->
+</div> <!-- END HTML SECTION 1  HTML-->
       
 
 
@@ -92,7 +92,7 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
 
 
 
-<div class="section" id="s2-section-div">  <!-- START SECTION 2 -->
+<div class="section" id="s2-section-div">  <!-- START HTML SECTION 2 -->
 
 <div class="section-header" id="s2-header"> <!-- START SECTION 2 HEADER -->
 
@@ -111,21 +111,84 @@ h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
   <span id="s2-1c" class="counter inactive-counter">0</span>
 </div>
 
-</div>                                 <!-- END SECTION 2 -->
+</div>                                 <!-- END HTML SECTION 2 -->
 
 
 <script>                //      /* <!-- START SCRIPT  -->  */
 'use strict'
+/*
+To ensure that calling
+s1.item1.add_1() updates the s1 section counter, the add_1 method
+ must reference the parent section object directly rather than a string ('s1').
 
-const itemMethods = {   // formerly: "section_methods_collection" = {
+ Here is the refactored code:
+ const itemMethods = {
+  init() {
+    // Bind 'this' so 'this.add_1' correctly refers to the item object
+    this.button.addEventListener('click', () => this.add_1());
+  },
+
+  add_1() {
+    this.count++;
+    // Access the parent section object directly
+    this.section.count++;
+    console.log(`${this.name} count: ${this.count}`);
+    console.log(`${this.section.name} total: ${this.section.count}`);
+  },
+};
+
+const s1 = {
+  name: 'Proteins',
+  count: 0,
+  limit: 2,
+  // ... rest of properties
+  item1: {
+    __proto__: itemMethods,
+    // Reference the parent object (s1) directly instead of a string 's1'
+    get section() { return s1; },
+    name: 'Tilapia',
+    count: 0,
+    button: document.querySelector('#s1-1'), // Ensure these exist in DOM
+  },
+};
+
+const s2 = {
+  name: 'Eggs',
+  count: 0,
+  limit: 1,
+  // ... rest of properties
+  item1: {
+    __proto__: itemMethods,
+    // Reference the parent object (s2) directly
+    get section() { return s2; },
+    name: '6 raw eggs',
+    count: 0,
+    button: document.querySelector('#s2-1'), // Ensure these exist in DOM
+  },
+};
+
+// Initialize
+s1.item1.init();
+s2.item1.init();
+
+// Test:
+// s1.item1.add_1(); // Updates s1.count
+// s2.item1.add_1(); // Updates s2.count
+
+Key Changes
+
+    Getter for section: Instead of section: 's1' (a string), I used get section() { return s1; } (a getter function). This creates a direct reference to the parent object, allowing this.section.count++ to work correctly.
+    this Context: In the addEventListener callback, the arrow function () => this.add_1() preserves the this context, ensuring this refers to the item object (s1.item1), not the button element.
+    Refactoring for Robustness: If s1.item1.button is null, the code will fail. Ensure selectors match your HTM
+*/
+const itemMethods = {   
 
   init() { // call to activate >> item#.init();
     this.button.addEventListener('click', () => this.select()); },
-/*
-*/
+
   add_1() {
     this.count++;
-    s1.count++;
+    this.section.count++;
   },
 
   set_item_selected_to_true(){
@@ -141,9 +204,9 @@ const itemMethods = {   // formerly: "section_methods_collection" = {
 // light grey background + text :  rgb(233,233,237)    // "#beecc7"; light green and darker green #2b943e";  
 
   style_item_counter_to_empty(){ // text invisible & no border
-    this.counter.style.color = "rgb(233,233,237)";
-    this.counter.style.backgroundColor = "rgb(233,233,237)";
-    this.counter.style.border = "none";
+    this.counter.style.color = "white";
+    //this.counter.style.backgroundColor = "rgb(233,233,237)";
+    //this.counter.style.border = "none";
   },
 
   style_item_counter_to_selected() {   // text-visible & background green #beecc7 
@@ -159,9 +222,9 @@ const itemMethods = {   // formerly: "section_methods_collection" = {
   },
 
   style_all_selected_item_counters_to_empty(){ // No border, and text invisible.
-    s1.counter.style.color = "rgb(233,233,237)";
-    s1.counter.style.backgroundColor = "rgb(233,233,237)";
-    s1.counter.style.border = "none";
+    s1.counter.style.color = "white";
+    //s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    //s1.counter.style.border = "none";
   },
   
   style_all_selected_item_counters_to_selected(){ // text invisible & no border
@@ -255,7 +318,7 @@ const itemMethods = {   // formerly: "section_methods_collection" = {
     this.display_item_count_on_page();
     //this.display_section_count_on_page();
 
-    if (s1.count == s1.limit) {
+    if (this.section.count == this.section.limit) {
       this.set_section_limit_reached_to_true();
       //this.style_item_counter_to_limit_reached();
       //this.style_section_counter_to_limit_reached();
@@ -297,7 +360,7 @@ const itemMethods = {   // formerly: "section_methods_collection" = {
   },
 
   select_item_from_section_while_limit_reached(){
-    if (s1.limit_reached) {
+    if (this.section.limit_reached) {
       this.drop_item_from_section(); // enable buttons / 
       this.display_all_section_counts();
       //this.style_item_counters : 0, selected, or at limit
@@ -305,7 +368,7 @@ const itemMethods = {   // formerly: "section_methods_collection" = {
   },
 
   select(){
-    if (s1.limit_reached) {
+    if (this.section.limit_reached) {
       this.select_item_from_section_while_limit_reached();
     } else {
       this.select_item_from_zero();
@@ -366,9 +429,9 @@ const itemMethods = {   // formerly: "section_methods_collection" = {
 
   style_all_item_counters_to_empty(){
     s1_items.forEach(item => {
-      item.counter.style.backgroundColor = "rgb(233,233,237)";
-      item.counter.style.color = "rgb(233,233,237)"; 
-      item.counter.style.border = "none";
+      //item.counter.style.backgroundColor = "rgb(233,233,237)";
+      item.counter.style.color = "white"; 
+      //item.counter.style.border = "none";
       item.counter.innerHTML = item.count;
     });
   },
@@ -383,7 +446,7 @@ const itemMethods = {   // formerly: "section_methods_collection" = {
     this.set_section_count_to_zero();
     this.set_section_limit_reached_to_false();
     this.log_section_status();
-    this.style_section_counter_to_empty(); 
+    //this.style_section_counter_to_empty(); 
     this.enable_all_item_buttons();
 
     this.set_all_item_counts_to_zero();
@@ -405,6 +468,7 @@ const s1 = {
 
   item1 : {
     __proto__: itemMethods,
+    section : 's1',
     name : 'Tilapia',
     count : 0,
     limit : null,
@@ -416,6 +480,7 @@ const s1 = {
 
   item2 : {
     __proto__: itemMethods,
+    section : 's1',
     name : 'Chicken Breast',
     count : 0,
     limit : null,
@@ -427,6 +492,7 @@ const s1 = {
 
  item3 : {
   __proto__: itemMethods,
+  section : 's1',
   name : 'Pork Chop',
   count : 0,
   limit : null,
@@ -439,6 +505,7 @@ const s1 = {
 
  item4 : {
   __proto__: itemMethods,
+  section : 's1',
   name : 'Tempeh',
   count : 0,
   limit : null,
@@ -450,6 +517,7 @@ const s1 = {
 
  item5 : {
   __proto__: itemMethods,
+  section : 's1',
   name : 'Tuna',
   count : 0,
   limit : null,
@@ -461,6 +529,7 @@ const s1 = {
 
  item6 : {
   __proto__: itemMethods,
+  section : 's1',
   name : 'Protein Trail Mix',
   count : 0,
   limit : null,
@@ -472,6 +541,7 @@ const s1 = {
 
  item7 : {
   __proto__: itemMethods,
+  section : 's1',
   name : 'Firm Tofu',
   count : 0,
   limit : null,
@@ -483,6 +553,7 @@ const s1 = {
 
  item8 : {
   __proto__: itemMethods,
+  section : 's1',
   name : 'Tempeh Cauliflower Patty',
   nameBR : 'Tempeh Cauli-<br>flower Patty',
   count : 0,
@@ -505,6 +576,7 @@ const s2 = {
 
  item1 : {
   __proto__: itemMethods,
+  section : 's2',
   name : '6 raw eggs',
   count : 0,
   limit : null,
@@ -517,7 +589,49 @@ const s2 = {
 };
 
 
-/*  EMPTY ITEM DEFINITION
+s1.title.innerHTML = s1.name;
+s1.choose.innerHTML = s1.limit;
+s1.item1.button.innerHTML = s1.item1.name;
+s1.item2.button.innerHTML = s1.item2.name;
+s1.item3.button.innerHTML = s1.item3.name;
+s1.item4.button.innerHTML = s1.item4.name;
+s1.item5.button.innerHTML = s1.item5.name;
+s1.item6.button.innerHTML = s1.item6.name;
+s1.item7.button.innerHTML = s1.item7.name;
+s1.item8.button.innerHTML = s1.item8.name;
+
+s2.title.innerHTML = s2.name;
+s2.choose.innerHTML = s2.limit;
+s2.item1.button.innerHTML = s2.item1.name;
+
+// reset_s1.button.innerHTML = reset_s1.name;
+
+s1.item1.init();
+s1.item2.init();
+s1.item3.init();
+s1.item4.init();
+s1.item5.init();
+s1.item6.init();
+s1.item7.init();
+s1.item8.init();
+// reset_s1.init();
+
+s2.item1.init();
+
+
+const s1_items = [ s1.item1, s1.item2, s1.item3, s1.item4, s1.item5, s1.item6, s1.item7, s1.item8, ];
+const s2_items = [ s2.item1, ];
+
+
+/*  EMPTY SECTION + ITEM DEFINITIONS
+
+const s = {
+  name : 'Eggs',
+  count : 0,
+  limit : 1,
+  limit_reached : false,
+  title : document.querySelector('#s-title'),
+  choose : document.querySelector('#s-choose-amount'),
 
 const item = {
   __proto__: itemMethods,
@@ -526,8 +640,8 @@ const item = {
   limit : null,
   selected : false,
   limit_reached : false,
-  button : document.querySelector('#i'),
-  counter : document.querySelector('#ic'),
+  button : document.querySelector('#s-'),
+  counter : document.querySelector('#s-c'),
 };
 
 const reset_s1 = {
@@ -556,35 +670,9 @@ Object.setPrototypeOf(item5, section_methods_collection);
 Object.setPrototypeOf(item6, section_methods_collection);
 Object.setPrototypeOf(item7, section_methods_collection);
 Object.setPrototypeOf(item8, section_methods_collection);
-*/
+
 // Object.setPrototypeOf(reset_s1, section_methods_collection);
 
-s1.title.innerHTML = s1.name;
-s1.choose.innerHTML = s1.limit;
-s1.item1.button.innerHTML = s1.item1.name;
-s1.item2.button.innerHTML = s1.item2.name;
-s1.item3.button.innerHTML = s1.item3.name;
-s1.item4.button.innerHTML = s1.item4.name;
-s1.item5.button.innerHTML = s1.item5.name;
-s1.item6.button.innerHTML = s1.item6.name;
-s1.item7.button.innerHTML = s1.item7.name;
-s1.item8.button.innerHTML = s1.item8.name;
-// reset_s1.button.innerHTML = reset_s1.name;
-
-item1.init();
-item2.init();
-item3.init();
-item4.init();
-item5.init();
-item6.init();
-item7.init();
-item8.init();
-// reset_s1.init();
-
-const s1_items = [ item1, item2, item3, item4, item5, item6, item7, item8, ];
-
-
-/*
 item3.init = function() {                           // call to activate >> item3.init();
     this.button.addEventListener('click', () => this.select());
 };
