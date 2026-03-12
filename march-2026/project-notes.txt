@@ -1,0 +1,88 @@
+
+/*
+Object.setPrototypeOf(item1, section_methods_collection);
+Object.setPrototypeOf(item2, section_methods_collection);
+Object.setPrototypeOf(item3, section_methods_collection);
+Object.setPrototypeOf(item4, section_methods_collection);
+Object.setPrototypeOf(item5, section_methods_collection);
+Object.setPrototypeOf(item6, section_methods_collection);
+Object.setPrototypeOf(item7, section_methods_collection);
+Object.setPrototypeOf(item8, section_methods_collection);
+
+// Object.setPrototypeOf(reset_s1, section_methods_collection);
+
+item3.init = function() {                           // call to activate >> item3.init();
+    this.button.addEventListener('click', () => this.select());
+};
+
+// init as a property:
+
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+
+
+const reset_s1 = {
+  name : 'rest section',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+
+};
+
+// init as a property:
+
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+
+ADDING PROPERTIES 
+Using Dot Notation After Creation (Post-Initialization)
+
+const item3 = Object.create(item1);
+item3.uniqueProp = "I am unique"; // Added directly
+item3.anotherProp = 100;
+
+//////  ALSO    ///////////////////////
+
+const item1 = {
+    name : 'butter',
+    show(){alert("This is " + this.name)},
+};
+
+const item2 = { name : 'eggs' };
+const item3 = { name : 'milk' };
+const item4 = { name : 'cheese' };
+
+// Set prototypes
+Object.setPrototypeOf(item2, item1);
+Object.setPrototypeOf(item3, item1);
+Object.setPrototypeOf(item4, item1);
+
+// Usage:
+item2.show(); // Alerts: "This is eggs"
+item3.show(); // Alerts: "This is milk"
+item4.show(); // Alerts: "This is cheese"
+
+ADD A METHOD  //////////////////////////
+
+item3.sayHello = function() {
+    console.log("Hello, I am " + this.name);
+};
+
+// Test it
+item3.sayHello(); // Output: "Hello, I am milk"
+item3.show();     // Output: "This is milk" (inherited from item1)
+
+//////////////  EMPTY ITEM   ///////////////////
+
+item.name = '';
+item.count = 0;
+item.limit = null;
+item.selected = false;
+item.limit_reached = false;
+item.button = document.querySelector('#i');
+item.counter = document.querySelector('#ic');
+
+*/

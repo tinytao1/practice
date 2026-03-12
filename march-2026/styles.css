@@ -1,0 +1,20 @@
+body { background-color: dimgrey; }
+.item-div { margin-bottom:4px;}
+.item-btn { margin-right: 5px; padding: 2px 5px; cursor: pointer; min-width: 180px; /*
+            border:1px solid rgb(143,143,157); border-radius: 9999px;
+            background-color: rgb(233,233,237); */
+            } 
+.counter {/* padding: 1px 4px;  */
+          /* background-color: rgb(233,233,237);  */
+           color: white; /* light gray:  rgb(233,233,237);  */
+          /* border-radius: 9999px;  */
+          font-family: Arial, Helvetica, sans-serif;
+          border-bottom: 1px solid gray;  } 
+
+/* #s1-1c { min-width: 8px;
+        background-color: white; } */
+/* .item-btn:hover { border:1px solid rgb(0,0,0); } */
+/* .item-btn:active {background-color: #d5d5dd;} */
+h2 { font-size: 1.2rem; /* Or use other units like em, rem, or % */ }
+.section-title { display: inline-block;}
+

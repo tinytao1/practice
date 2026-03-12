@@ -1,0 +1,64 @@
+
+<script src="prototype.js" ></script>
+<script src="section1.js" ></script>
+<script src="section2.js" ></script>
+<script src="section3.js" ></script>
+<script src="init.js" ></script>
+
+
+
+//      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
+///////////////////////////////////////////////////////////////
+////////////  ITEM COUNTER  //////////////////////  "#ffe6e6"; pink light  palergreen #bffabb palest green #e9fce8
+// light grey background + text :  rgb(233,233,237)    // "#beecc7"; light green and darker green #2b943e";  
+
+style_item_counter_to_limit_reached(){ // background pink & border red
+      //this.counter.style.backgroundColor = "#beecc7";
+      //this.counter.style.color = "rgb(0,0,0)"; 
+      //this.counter.style.border = "1px solid red";
+  },
+
+  
+  style_all_selected_item_counters_to_selected(){ // text invisible & no border
+    this.section.items.forEach(item => {
+      if (item.selected) { 
+        //item.counter.style.border = "1px solid #bffabb";
+        //item.counter.style.backgroundColor = "#e9fce8";
+      }
+    } );
+  },
+
+  style_all_selected_item_counters_to_limit_reached(){ // background pink & border red
+    this.section.items.forEach(item => {
+      if (item.selected) { 
+        //item.counter.style.backgroundColor = "#beecc7";
+        //item.counter.style.border = "1px solid red";
+      }
+    } );
+  },
+
+ /* //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
+///////////////////////////////////////////////////////////////
+////////////   SECTION COUNTER  ////////////////
+
+  style_section_counter_to_empty() { // text invisible & no border
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.color = "rgb(233,233,237)"; 
+    s1.counter.style.border = "none";
+   },
+   
+   style_section_counter_to_selected() { // text-visible, plain background, no border
+    s1.counter.style.color = "rgb(0,0,0)"; 
+    s1.counter.style.backgroundColor = "rgb(233,233,237)";
+    s1.counter.style.border = "1px solid black";
+  },
+  
+  style_section_counter_to_limit_reached(){ // background pink & border red
+    s1.counter.style.backgroundColor = "#ffe6e6";
+    s1.counter.style.color = "rgb(0,0,0)"; 
+    s1.counter.style.border = "1px solid red";
+   },
+  
+     //      STYLE COUNTER :  EMPTY  /  SELECTED  /  & LIMIT_REACHED 
+///////////////////////////////////////////////////////////////
+////////////   SECTION COUNTER  ///////////////// */

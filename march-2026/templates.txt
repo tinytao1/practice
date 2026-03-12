@@ -1,0 +1,61 @@
+
+
+<div class="section" id="s-section-div">  <!-- START HTML SECTION  -->
+
+<div class="section-header" id="s-header"> <!-- START SECTION  HEADER -->
+
+<h2 class="section-title" id="s-title" > section title </h2>
+<!-- <span class="section-counter" id="s1c"> 0 </span> -->
+  
+<span>(choose 
+  <span class="choose-amount" id="s-choose-amount" >
+    0 </span> 
+)</span>
+
+</div>                                  <!-- END SECTION  HEADER -->
+
+<div class="item-div">
+  <button id="s-1" class="item-btn inactive-btn ">item1</button>
+  <span id="s-1c" class="counter inactive-counter">0</span>
+</div>
+
+</div>                                 <!-- END HTML SECTION  -->
+
+
+/*  EMPTY SECTION + ITEM DEFINITIONS
+
+const s = {
+  name : 'Eggs',
+  count : 0,
+  limit : 1,
+  limit_reached : false,
+  title : document.querySelector('#s-title'),
+  choose : document.querySelector('#s-choose-amount'),
+
+  item : {
+  __proto__: itemMethods,
+  get section() { return s; }, 
+  name : '',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#s-'),
+  counter : document.querySelector('#s-c'),
+},
+};
+
+ reset_s1 : {
+  name : 'Rest section',
+  count : 0,
+  limit : null,
+  selected : false,
+  limit_reached : false,
+  button : document.querySelector('#i5'),
+  counter : document.querySelector('#i5c'),
+},
+};
+  init() { // call to activate >> reset_section.init();
+    this.button.addEventListener('click', () => this.reset_section()); },
+
+};
